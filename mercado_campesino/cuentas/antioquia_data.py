@@ -1,0 +1,17 @@
+MUNICIPIOS_ANTIOQUIA = [
+    ('Medellín', 'Medellín'),
+    ('Bello', 'Bello'),
+    ('Envigado', 'Envigado'),
+    ('Itagüí', 'Itagüí'),
+    ('Rionegro', 'Rionegro'),
+    ('Sabaneta', 'Sabaneta'),
+    ('La Estrella', 'La Estrella'),
+    ('Copacabana', 'Copacabana'),
+    ('Caldas', 'Caldas'),
+    ('Marinilla', 'Marinilla'),
+    ('La Ceja', 'La Ceja'),
+    ('El Carmen de Viboral', 'El Carmen de Viboral'),
+    ('Guarne', 'Guarne'),
+    ('Santa Fe de Antioquia', 'Santa Fe de Antioquia'),
+    ('San Jerónimo', 'San Jerónimo'),
+]

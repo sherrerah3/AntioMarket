@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import Usuario, CuentaCliente, CuentaVendedor, UbicacionVendedor
+from .antioquia_data import MUNICIPIOS_ANTIOQUIA
 
 class RegistroClienteForm(forms.ModelForm):
     """Formulario para registro de clientes"""
@@ -125,17 +126,17 @@ class RegistroVendedorForm(forms.ModelForm):
     
     # Campos de ubicación
     departamento = forms.CharField(
-        max_length=100,
         widget=forms.TextInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Ej: Antioquia'
+            'readonly': True,
+            'value': 'Antioquia'
         })
     )
-    municipio = forms.CharField(
-        max_length=100,
-        widget=forms.TextInput(attrs={
+    municipio = forms.ChoiceField(
+        choices=[('', 'Seleccione un municipio')] + MUNICIPIOS_ANTIOQUIA,
+        widget=forms.Select(attrs={
             'class': 'form-control',
-            'placeholder': 'Ej: Medellín'
+            'id': 'id_municipio'
         })
     )
     direccion_tienda = forms.CharField(
@@ -157,7 +158,11 @@ class RegistroVendedorForm(forms.ModelForm):
     
     class Meta:
         model = CuentaVendedor
-        fields = ['nombre_tienda', 'descripcion_tienda']
+        fields = [
+            'username', 'first_name', 'last_name', 'email', 
+            'password1', 'password2', 'departamento', 'municipio',
+            'nombre_tienda', 'descripcion_tienda', 'direccion_tienda'
+        ]
         widgets = {
             'nombre_tienda': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -167,6 +172,10 @@ class RegistroVendedorForm(forms.ModelForm):
                 'class': 'form-control',
                 'rows': 4,
                 'placeholder': 'Describe tu tienda, productos que vendes, experiencia, etc.'
+            }),
+            'direccion_tienda': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Dirección donde vendes tus productos'
             })
         }
     
