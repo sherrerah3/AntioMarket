@@ -18,23 +18,38 @@ class HomeView(ListView):
     
     def get_queryset(self):
         queryset = Producto.objects.all()
+        form = BuscarProductoForm(self.request.GET)
+        
+        # Obtener filtros de categoría y búsqueda
         categoria = self.request.GET.get('categoria')
         busqueda = self.request.GET.get('buscar')
         
+        # Aplicar filtro por categoría
         if categoria:
             queryset = queryset.filter(categoria=categoria)
-            
+        
+        # Aplicar filtro de búsqueda
         if busqueda:
             queryset = queryset.filter(
                 Q(nombre__icontains=busqueda) |
                 Q(descripcion__icontains=busqueda)
             )
+        
+        # Aplicar otros filtros del form si existen
+        if form.is_valid():
+            if form.cleaned_data.get('precio_min'):
+                queryset = queryset.filter(precio__gte=form.cleaned_data['precio_min'])
+            if form.cleaned_data.get('precio_max'):
+                queryset = queryset.filter(precio__lte=form.cleaned_data['precio_max'])
             
-        return queryset
+        return queryset.order_by('-id')  # Ordenar por más recientes primero
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        # Agregar categorías únicas al contexto
         context['categorias'] = Producto.objects.values_list('categoria', flat=True).distinct()
+        # Agregar el formulario de búsqueda
+        context['form'] = BuscarProductoForm(self.request.GET)
         return context
 
 class ProductoDetailView(DetailView):

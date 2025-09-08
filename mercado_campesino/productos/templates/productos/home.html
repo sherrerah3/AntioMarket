@@ -13,8 +13,8 @@
 
     <!-- Filtros de búsqueda -->
     <div class="row justify-content-center mb-4">
-        <div class="col-md-8">
-            <form method="get" class="d-flex justify-content-center gap-3">
+        <div class="col-md-10">
+            <form method="get" class="d-flex justify-content-center gap-3 align-items-center">
                 <select name="categoria" class="form-select" style="max-width: 200px;">
                     <option value="">Todas las categorías</option>
                     {% for categoria in categorias %}
@@ -27,7 +27,14 @@
                     <input type="search" name="buscar" class="form-control" placeholder="Buscar productos..." 
                            value="{{ request.GET.buscar|default:'' }}">
                 </div>
-                <button type="submit" class="btn btn-primary">Buscar</button>
+                <div class="d-flex gap-2">
+                    <input type="number" name="precio_min" class="form-control" style="max-width: 120px;" 
+                           placeholder="Precio min" value="{{ request.GET.precio_min|default:'' }}">
+                    <span>-</span>
+                    <input type="number" name="precio_max" class="form-control" style="max-width: 120px;" 
+                           placeholder="Precio max" value="{{ request.GET.precio_max|default:'' }}">
+                </div>
+                <button type="submit" class="btn btn-primary">Filtrar</button>
             </form>
         </div>
     </div>

@@ -100,3 +100,18 @@
 .gap-3 {
     gap: 1rem;
 }
+
+.form-control[type="number"] {
+    border-radius: 20px;
+    padding: 10px 15px;
+    border: 2px solid var(--color-secundario);
+}
+
+.form-control[type="number"]:focus {
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 0.25rem rgba(var(--color-primario-rgb), 0.25);
+}
+
+.d-flex.gap-2 {
+    gap: 0.5rem !important;
+}
