@@ -1,0 +1,24 @@
+
+# Archivos de cache de Python
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Archivos de entorno
+.env
+.venv
+venv/
+env/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
