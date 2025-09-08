@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Mis Pedidos - AntioMarket{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Mis Pedidos</h1>
+    
+    {% if pedidos %}
+        {% for pedido in pedidos %}
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Pedido #{{ pedido.id }}</h5>
+                    <span class="badge {% if pedido.estado == 'pendiente' %}bg-warning{% elif pedido.estado == 'completado' %}bg-success{% else %}bg-danger{% endif %}">
+                        {{ pedido.get_estado_display }}
+                    </span>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Fecha:</strong> {{ pedido.fecha_creacion|date:"d/m/Y H:i" }}</p>
+                        </div>
+                        <div class="col-md-6 text-md-end">
+                            <p><strong>Total:</strong> ${{ pedido.total }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive mt-3">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio Unit.</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for detalle in pedido.detalles.all %}
+                                    <tr>
+                                        <td>{{ detalle.producto.nombre }}</td>
+                                        <td>{{ detalle.cantidad }}</td>
+                                        <td>${{ detalle.precio_unitario }}</td>
+                                        <td>${{ detalle.subtotal }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-info">
+            <p class="mb-0">Aún no has realizado ningún pedido.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

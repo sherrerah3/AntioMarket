@@ -25,6 +25,7 @@ urlpatterns = [
     path('cuentas/', include('cuentas.urls')),
     path('carrito/', include('carrito.urls')),
     path('reseñas/', include('reseñas.urls')),
+    path('pedidos/', include('pedidos.urls')),
 ]
 
 if settings.DEBUG:  # Para desarrollo

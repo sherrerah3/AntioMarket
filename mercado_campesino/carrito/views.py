@@ -3,9 +3,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.http import JsonResponse
 from django.views import View
-from django.views.generic import TemplateView
+from django.db import transaction
+from django.views.generic import TemplateView, View
+from django.shortcuts import redirect
 from productos.models import Producto
 from cuentas.models import CuentaCliente
+from pedidos.models import Pedido, DetallePedido
 from .models import Carrito, CarritoItem
 
 
@@ -187,15 +190,58 @@ class ContadorCarritoView(LoginRequiredMixin, CarritoMixin, View):
             return JsonResponse({'total_items': 0})
 
 
-def ver_carrito(request):
-    carrito = Carrito.objects.get_or_create(usuario=request.user)[0]
-    items = CarritoItem.objects.filter(carrito=carrito)
+class ProcesarPedidoView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        return redirect('carrito:ver_carrito')
     
-    # Calcula el total sumando los subtotales de cada ítem
-    total = sum(item.subtotal for item in items)
+    def post(self, request, *args, **kwargs):
+        try:
+            return self._procesar_pedido(request)
+        except ValueError as e:
+            messages.error(request, str(e))
+        except Exception as e:
+            print(f"Error procesando pedido: {str(e)}")
+            messages.error(request, f'Error al procesar pedido: {str(e)}')
+        return redirect('carrito:ver_carrito')
     
-    context = {
-        'items': items,
-        'total': total
-    }
-    return render(request, 'carrito/ver_carrito.html', context)
+    def _procesar_pedido(self, request):
+        # Get CuentaCliente instance
+        cuenta_cliente = request.user.cuentacliente
+        carrito = Carrito.objects.get(cliente=cuenta_cliente)
+        items = CarritoItem.objects.filter(carrito=carrito)
+        
+        if not items.exists():
+            messages.error(request, 'Tu carrito está vacío')
+            return redirect('carrito:ver_carrito')
+        
+        with transaction.atomic():
+            pedido = self._crear_pedido(cuenta_cliente, items)
+            self._procesar_items_carrito(items, pedido)
+            items.delete()
+            
+            messages.success(request, '¡Pedido realizado con éxito!')
+            return redirect('pedidos:mis_pedidos')
+    
+    def _crear_pedido(self, cuenta_cliente, items):
+        total = sum(item.producto.precio * item.cantidad for item in items)
+        return Pedido.objects.create(
+            cliente=cuenta_cliente,
+            total=total,
+            estado='pendiente'
+        )
+    
+    def _procesar_items_carrito(self, items, pedido):
+        for item in items:
+            if item.cantidad > item.producto.stock:
+                raise ValueError(f'Stock insuficiente para {item.producto.nombre}')
+            
+            DetallePedido.objects.create(
+                pedido=pedido,
+                producto=item.producto,
+                cantidad=item.cantidad,
+                precio_unitario=item.producto.precio,
+                subtotal=item.producto.precio * item.cantidad
+            )
+            
+            item.producto.stock -= item.cantidad
+            item.producto.save()

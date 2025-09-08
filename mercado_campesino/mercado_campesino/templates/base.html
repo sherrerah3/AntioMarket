@@ -55,12 +55,27 @@
                             <i class="fas fa-user me-1"></i>{{ user.first_name|default:user.username }}
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'cuentas:perfil' %}">
-                                <i class="fas fa-user-circle me-2"></i>Mi Perfil
-                            </a></li>
-                            <li><a class="dropdown-item" href="#">
-                                <i class="fas fa-shopping-bag me-2"></i>Mis Pedidos
-                            </a></li>
+                            {% if user.is_vendedor %}
+                                <li><a class="dropdown-item" href="{% url 'cuentas:perfil_vendedor' %}">
+                                    <i class="fas fa-user-circle me-2"></i>Mi Perfil
+                                </a></li>
+                                <li><a class="dropdown-item" href="{% url 'productos:mis_productos' %}">
+                                    <i class="fas fa-box me-2"></i>Mis Productos
+                                </a></li>
+                            {% endif %}
+                            
+                            {% if user.is_cliente %}
+                                <li><a class="dropdown-item" href="{% url 'cuentas:perfil_cliente' %}">
+                                    <i class="fas fa-user-circle me-2"></i>Mi Perfil
+                                </a></li>
+                                <li><a class="dropdown-item" href="{% url 'pedidos:mis_pedidos' %}">
+                                    <i class="fas fa-shopping-bag me-2"></i>Mis Pedidos
+                                </a></li>
+                                <li><a class="dropdown-item" href="{% url 'carrito:ver_carrito' %}">
+                                    <i class="fas fa-shopping-cart me-2"></i>Mi Carrito
+                                </a></li>
+                            {% endif %}
+                            
                             <li><hr class="dropdown-divider"></li>
                             <li class="dropdown-item logout-btn">
                                 <form method="post" action="{% url 'cuentas:logout' %}" style="display: inline;">
