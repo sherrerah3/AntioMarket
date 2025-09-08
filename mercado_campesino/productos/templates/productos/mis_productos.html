@@ -1,0 +1,259 @@
+{% extends 'base.html' %}
+
+{% block title %}Mis Productos - AntioMarket{% endblock %}
+
+{% block extra_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="{% static 'cuentas/css/perfiles.css' %}">
+<style>
+.productos-header {
+    background: linear-gradient(135deg, #2d5a27 0%, #4a7c59 100%);
+    color: white;
+    padding: 30px 0;
+    margin-bottom: 30px;
+}
+
+.producto-item {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.producto-item:hover {
+    transform: translateY(-2px);
+}
+
+.producto-imagen {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.producto-info h5 {
+    color: #2d5a27;
+    margin-bottom: 10px;
+}
+
+.producto-precio {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #28a745;
+}
+
+.producto-stock {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.stock-disponible {
+    background: #d4edda;
+    color: #155724;
+}
+
+.stock-bajo {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.stock-agotado {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.btn-accion {
+    padding: 8px 15px;
+    margin: 0 5px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+}
+
+.btn-editar {
+    background: #007bff;
+    color: white;
+}
+
+.btn-editar:hover {
+    background: #0056b3;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-eliminar {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-eliminar:hover {
+    background: #c82333;
+    color: white;
+    text-decoration: none;
+}
+
+.estado-producto {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.activo {
+    background: #d4edda;
+    color: #155724;
+}
+
+.agotado {
+    background: #f8d7da;
+    color: #721c24;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="productos-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h2><i class="fas fa-store me-2"></i>Mis Productos</h2>
+                <p class="mb-0">Gestiona todos tus productos desde aquí</p>
+            </div>
+            <div class="col-md-4 text-end">
+                <a href="{% url 'productos:crear_producto' %}" class="btn btn-light btn-lg">
+                    <i class="fas fa-plus me-2"></i>Agregar Producto
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if productos %}
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <h4>Total de productos: {{ productos|length }}</h4>
+            </div>
+            <div class="col-md-6 text-end">
+                <small class="text-muted">Mostrando página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</small>
+            </div>
+        </div>
+
+        {% for producto in productos %}
+        <div class="producto-item">
+            <div class="row align-items-center">
+                <div class="col-md-2">
+                    {% if producto.imagen %}
+                        <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="producto-imagen">
+                    {% else %}
+                        <div class="producto-imagen bg-light d-flex align-items-center justify-content-center">
+                            <i class="fas fa-image text-muted"></i>
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="col-md-4 producto-info">
+                    <h5>{{ producto.nombre }}</h5>
+                    <p class="text-muted mb-1">{{ producto.descripcion|truncatewords:15 }}</p>
+                    <small class="text-secondary">
+                        <i class="fas fa-tag me-1"></i>{{ producto.categoria }}
+                    </small>
+                </div>
+                
+                <div class="col-md-2 text-center">
+                    <div class="producto-precio">${{ producto.precio }}</div>
+                </div>
+                
+                <div class="col-md-2 text-center">
+                    {% if producto.stock > 10 %}
+                        <span class="producto-stock stock-disponible">{{ producto.stock }} disponibles</span>
+                    {% elif producto.stock > 0 %}
+                        <span class="producto-stock stock-bajo">{{ producto.stock }} disponibles</span>
+                    {% else %}
+                        <span class="producto-stock stock-agotado">Agotado</span>
+                    {% endif %}
+                </div>
+                
+                <div class="col-md-2 text-end">
+                    <a href="{% url 'productos:editar_producto' producto.pk %}" class="btn-accion btn-editar" title="Editar">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="{% url 'productos:eliminar_producto' producto.pk %}" class="btn-accion btn-eliminar" title="Eliminar">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- Paginación -->
+        {% if is_paginated %}
+        <nav aria-label="Paginación de productos">
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1">&laquo; Primera</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+                    </li>
+                {% endif %}
+
+                <li class="page-item active">
+                    <span class="page-link">
+                        Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+                    </span>
+                </li>
+
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+
+    {% else %}
+        <div class="text-center py-5">
+            <div class="mb-4">
+                <i class="fas fa-shopping-basket fa-5x text-muted"></i>
+            </div>
+            <h3>No tienes productos registrados</h3>
+            <p class="text-muted mb-4">¡Comienza agregando tu primer producto para empezar a vender!</p>
+            <a href="{% url 'productos:crear_producto' %}" class="btn btn-registro vendedor btn-lg">
+                <i class="fas fa-plus me-2"></i>Agregar Mi Primer Producto
+            </a>
+        </div>
+    {% endif %}
+
+    <!-- Botones de navegación -->
+    <div class="text-center mt-4 mb-5">
+        <a href="{% url 'cuentas:perfil_vendedor' %}" class="btn btn-secondary me-3">
+            <i class="fas fa-arrow-left me-2"></i>Volver al Perfil
+        </a>
+        <a href="{% url 'productos:home' %}" class="btn btn-outline-success">
+            <i class="fas fa-home me-2"></i>Ver Tienda
+        </a>
+    </div>
+</div>
+{% endblock %}

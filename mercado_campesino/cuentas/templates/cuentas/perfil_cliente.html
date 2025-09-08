@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}Perfil Cliente - AntioMarket{% endblock %}
+
+{% block extra_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="{% static 'cuentas/css/perfiles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="perfil-container">
+        <div class="perfil-header">
+            <h2><i class="fas fa-user"></i> Perfil de Cliente</h2>
+            <p class="text-muted">Bienvenido a tu perfil</p>
+        </div>
+        
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+        
+        <!-- Información Personal -->
+        <div class="info-section">
+            <h4><i class="fas fa-user me-2"></i>Información Personal</h4>
+            <div class="info-item">
+                <span class="info-label">Nombre:</span>
+                {{ cuenta.usuario.first_name }} {{ cuenta.usuario.last_name }}
+            </div>
+            <div class="info-item">
+                <span class="info-label">Usuario:</span>
+                {{ cuenta.usuario.username }}
+            </div>
+            <div class="info-item">
+                <span class="info-label">Email:</span>
+                {{ cuenta.usuario.email }}
+            </div>
+            <div class="info-item">
+                <span class="info-label">Dirección:</span>
+                {{ cuenta.direccion }}
+            </div>
+            <div class="info-item">
+                <span class="info-label">Miembro desde:</span>
+                {{ cuenta.usuario.date_joined|date:"d/m/Y" }}
+            </div>
+        </div>
+        
+        <!-- Estadísticas del Cliente -->
+        <div class="info-section">
+            <h4><i class="fas fa-chart-bar me-2"></i>Estadísticas</h4>
+            <div class="estadisticas">
+                <div class="estadistica-card">
+                    <div class="estadistica-numero">0</div>
+                    <div>Compras Realizadas</div>
+                </div>
+                <div class="estadistica-card">
+                    <div class="estadistica-numero">0</div>
+                    <div>Productos en Carrito</div>
+                </div>
+                <div class="estadistica-card">
+                    <div class="estadistica-numero">0</div>
+                    <div>Reseñas Escritas</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Historial de Compras -->
+        <div class="info-section">
+            <h4><i class="fas fa-shopping-cart me-2"></i>Historial de Compras</h4>
+            <p class="text-muted">Aún no has realizado compras.</p>
+            <a href="{% url 'productos:home' %}" class="btn-editar">
+                <i class="fas fa-shopping-basket me-2"></i>Explorar Productos
+            </a>
+        </div>
+        
+        <!-- Botones de Acción -->
+        <div class="text-center mt-4">
+            <a href="{% url 'cuentas:editar_perfil_cliente' %}" class="btn-editar">
+                <i class="fas fa-edit me-2"></i>Editar Perfil
+            </a>
+            <a href="{% url 'carrito:ver_carrito' %}" class="btn-editar">
+                <i class="fas fa-shopping-cart me-2"></i>Ver Carrito
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

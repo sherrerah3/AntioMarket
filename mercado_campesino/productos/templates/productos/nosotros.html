@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}Nosotros - AntioMarket{% endblock %}
+
+{% block extra_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/nosotros.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="nosotros-container">
+    <div class="container">
+        <!-- Información del Proyecto -->
+        <div class="project-info">
+            <h1 class="project-title">
+                <i class="fas fa-seedling me-3"></i>AntioMarket
+            </h1>
+            <p class="lead text-muted">Plataforma digital que conecta productores campesinos de Antioquia con consumidores conscientes, promoviendo el comercio local y el desarrollo sostenible.</p>
+        </div>
+        
+        <!-- Información de la Universidad -->
+        <div class="university-info mb-5">
+            <h3><i class="fas fa-university me-2"></i>Universidad EAFIT</h3>
+            <p class="mb-0">Arquitectura de Software - Quinto Semestre</p>
+        </div>
+        
+        <!-- Equipo de Desarrollo -->
+        <div class="row">
+            <div class="col-12">
+                <div class="team-card">
+                    <div class="team-member">
+                        <div class="member-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="member-name">Desarrolladores</h3>
+                        <p class="member-role">Samuel Herrera Hoyos & Juan José Gómez</p>
+                        <p class="text-muted">
+                            Estudiantes de Arquitectura de Software encargados del diseño, 
+                            desarrollo e implementación completa de la plataforma AntioMarket.
+                        </p>
+                        <div class="mt-3">
+                            <i class="fab fa-python me-3" style="color: var(--color-verde-claro); font-size: 1.5rem;" title="Python"></i>
+                            <i class="fab fa-js-square me-3" style="color: var(--color-verde-claro); font-size: 1.5rem;" title="JavaScript"></i>
+                            <i class="fas fa-database me-3" style="color: var(--color-verde-claro); font-size: 1.5rem;" title="Database"></i>
+                            <i class="fab fa-html5 me-3" style="color: var(--color-verde-claro); font-size: 1.5rem;" title="HTML5"></i>
+                            <i class="fab fa-css3-alt me-3" style="color: var(--color-verde-claro); font-size: 1.5rem;" title="CSS3"></i>
+                            <i class="fab fa-bootstrap me-3" style="color: var(--color-verde-claro); font-size: 1.5rem;" title="Bootstrap"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Información del Proyecto -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="team-card">
+                    <div class="text-center">
+                        <h3 style="color: var(--color-verde-oscuro);">
+                            <i class="fas fa-lightbulb me-2"></i>Sobre el Proyecto
+                        </h3>
+                        <p class="text-muted mt-3">
+                            AntioMarket nace como una solución tecnológica para fortalecer 
+                            la economía campesina de Antioquia, facilitando el acceso al mercado 
+                            digital para pequeños productores y conectándolos directamente con 
+                            consumidores que valoran productos frescos y de origen local.
+                        </p>
+                        <div class="row mt-4">
+                            <div class="col-md-4 text-center">
+                                <i class="fas fa-leaf" style="font-size: 2rem; color: var(--color-verde-claro);"></i>
+                                <h5 class="mt-2" style="color: var(--color-verde-oscuro);">Sostenible</h5>
+                                <p class="text-muted small">Promovemos prácticas agrícolas sostenibles</p>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <i class="fas fa-handshake" style="font-size: 2rem; color: var(--color-verde-claro);"></i>
+                                <h5 class="mt-2" style="color: var(--color-verde-oscuro);">Colaborativo</h5>
+                                <p class="text-muted small">Conectamos productores y consumidores</p>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <i class="fas fa-heart" style="font-size: 2rem; color: var(--color-verde-claro);"></i>
+                                <h5 class="mt-2" style="color: var(--color-verde-oscuro);">Local</h5>
+                                <p class="text-muted small">Apoyamos la economía local antioqueña</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

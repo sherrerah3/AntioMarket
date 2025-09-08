@@ -1,0 +1,143 @@
+/* Paleta de colores personalizada */
+:root {
+    --color-fondo: #f3e6c7;
+    --color-primario: #361e0e;
+    --color-secundario: #c38640;
+    --color-verde-oscuro: #4f652f;
+    --color-verde-claro: #748736;
+}
+
+body {
+    background-color: var(--color-fondo);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    color: var(--color-primario);
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--color-verde-oscuro) !important;
+    box-shadow: 0 2px 4px rgba(54, 30, 14, 0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: var(--color-fondo) !important;
+    font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+    color: var(--color-fondo) !important;
+    font-weight: 500;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--color-secundario) !important;
+}
+
+.dropdown-menu {
+    background-color: var(--color-fondo);
+    border: 1px solid var(--color-secundario);
+}
+
+.dropdown-item {
+    color: var(--color-primario);
+}
+
+.dropdown-item:hover {
+    background-color: var(--color-secundario);
+    color: var(--color-fondo);
+}
+
+/* Footer */
+.footer {
+    background-color: var(--color-primario);
+    color: var(--color-fondo);
+    margin-top: auto;
+}
+
+.footer h5, .footer h6 {
+    color: var(--color-secundario);
+}
+
+.footer a {
+    color: var(--color-fondo);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: var(--color-secundario);
+}
+
+.footer .text-muted {
+    color: rgba(243, 230, 199, 0.7) !important;
+}
+
+.footer hr {
+    border-color: var(--color-verde-oscuro);
+}
+
+/* Main content */
+main {
+    flex: 1;
+    background-color: var(--color-fondo);
+}
+
+/* Cart badge */
+.cart-badge {
+    background-color: var(--color-secundario);
+    color: var(--color-fondo);
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.8em;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    font-weight: bold;
+}
+
+/* Alerts */
+.alert {
+    border: none;
+    border-radius: 8px;
+}
+
+.alert-success {
+    background-color: var(--color-verde-claro);
+    color: var(--color-fondo);
+}
+
+.alert-error, .alert-danger {
+    background-color: #d63384;
+    color: white;
+}
+
+.alert-info {
+    background-color: var(--color-secundario);
+    color: var(--color-fondo);
+}
+
+.alert-warning {
+    background-color: #fd7e14;
+    color: white;
+}
+
+/* Logout button styling */
+.dropdown-item.logout-btn {
+    padding: 0;
+}
+
+.dropdown-item.logout-btn button {
+    padding: 8px 16px;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.dropdown-item.logout-btn button:hover {
+    background-color: var(--color-secundario);
+    color: var(--color-fondo);
+}

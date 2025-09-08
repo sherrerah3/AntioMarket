@@ -1,0 +1,64 @@
+/* Estilos para la página de login */
+.login-container {
+    max-width: 500px;
+    margin: 50px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(54, 30, 14, 0.1);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--color-verde-oscuro);
+}
+
+.login-container .form-control {
+    border: 2px solid rgba(79, 101, 47, 0.2);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 15px;
+}
+
+.login-container .form-control:focus {
+    border-color: var(--color-verde-claro);
+    box-shadow: 0 0 0 0.2rem rgba(116, 135, 54, 0.25);
+}
+
+.btn-login {
+    background-color: var(--color-verde-claro);
+    border-color: var(--color-verde-claro);
+    color: var(--color-fondo);
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+    background-color: var(--color-verde-oscuro);
+    border-color: var(--color-verde-oscuro);
+    color: var(--color-fondo);
+}
+
+.register-links {
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(79, 101, 47, 0.2);
+}
+
+.register-links a {
+    color: var(--color-secundario);
+    text-decoration: none;
+    font-weight: 500;
+    display: block;
+    margin: 0 10px;
+}
+
+.register-links a:hover {
+    color: var(--color-verde-oscuro);
+    text-decoration: underline;
+}
