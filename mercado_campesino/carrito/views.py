@@ -185,3 +185,17 @@ class ContadorCarritoView(LoginRequiredMixin, CarritoMixin, View):
             return JsonResponse({'total_items': total_items})
         except Carrito.DoesNotExist:
             return JsonResponse({'total_items': 0})
+
+
+def ver_carrito(request):
+    carrito = Carrito.objects.get_or_create(usuario=request.user)[0]
+    items = CarritoItem.objects.filter(carrito=carrito)
+    
+    # Calcula el total sumando los subtotales de cada ítem
+    total = sum(item.subtotal for item in items)
+    
+    context = {
+        'items': items,
+        'total': total
+    }
+    return render(request, 'carrito/ver_carrito.html', context)

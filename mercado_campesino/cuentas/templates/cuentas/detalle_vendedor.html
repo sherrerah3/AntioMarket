@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ vendedor.nombre_tienda }} - AntioMarket{% endblock %}
+
+{% block extra_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h1 class="page-title">{{ vendedor.nombre_tienda }}</h1>
+            <p class="lead">{{ vendedor.descripcion_tienda }}</p>
+            <p class="mb-0">
+                <i class="fas fa-map-marker-alt text-primary"></i>
+                {% for ubicacion in vendedor.ubicacionvendedor_set.all %}
+                    {{ ubicacion.municipio }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+                , Antioquia
+            </p>
+        </div>
+    </div>
+
+    <h2 class="mb-4">Productos disponibles</h2>
+    <div class="row">
+        {% for producto in productos %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm product-card">
+                {% if producto.imagen %}
+                    <a href="{% url 'productos:detalle_producto' producto.pk %}">
+                        <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}">
+                    </a>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'productos:detalle_producto' producto.pk %}" class="text-decoration-none">
+                            {{ producto.nombre }}
+                        </a>
+                    </h5>
+                    <p class="card-text">{{ producto.descripcion|truncatechars:100 }}</p>
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center bg-transparent border-0">
+                    <span class="price-tag">${{ producto.precio }}</span>
+                    {% if user.is_authenticated %}
+                        {% if user.is_cliente %}
+                            <a href="{% url 'carrito:agregar_producto' producto.id %}" class="btn btn-add-to-cart btn-sm">
+                                <i class="fas fa-cart-plus me-1"></i>Agregar al carrito
+                            </a>
+                        {% else %}
+                            <a href="{% url 'productos:detalle_producto' producto.pk %}" class="btn btn-outline-secondary btn-sm">
+                                <i class="fas fa-eye me-1"></i>Ver producto
+                            </a>
+                        {% endif %}
+                    {% else %}
+                        <a href="{% url 'cuentas:login' %}" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-sign-in-alt me-1"></i>Iniciar sesión
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="no-products text-center">
+                <i class="fas fa-box-open fa-3x mb-3" style="color: var(--color-secundario);"></i>
+                <h3>No hay productos disponibles</h3>
+                <p class="mb-0">Este productor aún no ha agregado productos a su tienda.</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

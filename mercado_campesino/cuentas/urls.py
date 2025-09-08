@@ -20,4 +20,8 @@ urlpatterns = [
     # Edición de perfiles
     path('perfil/cliente/editar/', views.EditarPerfilClienteView.as_view(), name='editar_perfil_cliente'),
     path('perfil/vendedor/editar/', views.EditarPerfilVendedorView.as_view(), name='editar_perfil_vendedor'),
+
+    # Ver vendedores disponibles
+    path('vendedores/', views.ListaVendedoresView.as_view(), name='lista_vendedores'),
+    path('vendedor/<int:pk>/', views.DetalleVendedorView.as_view(), name='detalle_vendedor'),
 ]

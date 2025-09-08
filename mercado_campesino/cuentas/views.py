@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.views import LoginView, LogoutView
-from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic import CreateView, DetailView, UpdateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.db import transaction
 from .models import Usuario, CuentaCliente, CuentaVendedor, UbicacionVendedor
+from productos.models import Producto
 from .forms import (
     RegistroClienteForm, 
     RegistroVendedorForm,
@@ -17,6 +18,21 @@ from .forms import (
 )
 
 # Create your views here.
+
+class ListaVendedoresView(ListView):
+    model = CuentaVendedor
+    template_name = 'cuentas/lista_vendedores.html'
+    context_object_name = 'vendedores'
+    
+class DetalleVendedorView(DetailView):
+    model = CuentaVendedor
+    template_name = 'cuentas/detalle_vendedor.html'
+    context_object_name = 'vendedor'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['productos'] = Producto.objects.filter(vendedor=self.object)
+        return context
 
 # Views de autenticación
 class CustomLoginView(LoginView):
