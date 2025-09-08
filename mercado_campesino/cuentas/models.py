@@ -19,10 +19,11 @@ class CuentaCliente(models.Model):
 
 class CuentaVendedor(models.Model):
     usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)
+    nombre_tienda = models.CharField(max_length=150, default='Mi Tienda')
     descripcion_tienda = models.TextField()
     
     def __str__(self):
-        return f"Vendedor: {self.usuario.username}"
+        return f"Vendedor: {self.nombre_tienda} ({self.usuario.username})"
 
 class UbicacionVendedor(models.Model):
     vendedor = models.ForeignKey(CuentaVendedor, on_delete=models.CASCADE)

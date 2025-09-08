@@ -1,0 +1,15 @@
+{% extends 'cuentas/editar_perfil_base.html' %}
+
+{% block form_fields %}
+<div class="mb-3">
+    <label for="{{ form.nombre_tienda.id_for_label }}" class="form-label">Nombre de la tienda</label>
+    {{ form.nombre_tienda }}
+    {{ form.nombre_tienda.errors }}
+</div>
+
+<div class="mb-3">
+    <label for="{{ form.descripcion_tienda.id_for_label }}" class="form-label">Descripción de la tienda</label>
+    {{ form.descripcion_tienda }}
+    {{ form.descripcion_tienda.errors }}
+</div>
+{% endblock %}
