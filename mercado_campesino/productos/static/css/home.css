@@ -73,3 +73,30 @@
     text-align: center;
     color: var(--color-primario);
 }
+
+.form-select {
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: 2px solid var(--color-secundario);
+    background-color: white;
+}
+
+.form-select:focus {
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 0.25rem rgba(var(--color-primario-rgb), 0.25);
+}
+
+.form-control {
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: 2px solid var(--color-secundario);
+}
+
+.form-control:focus {
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 0.25rem rgba(var(--color-primario-rgb), 0.25);
+}
+
+.gap-3 {
+    gap: 1rem;
+}

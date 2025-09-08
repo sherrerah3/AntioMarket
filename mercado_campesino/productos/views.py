@@ -17,48 +17,24 @@ class HomeView(ListView):
     paginate_by = 12
     
     def get_queryset(self):
-        queryset = Producto.objects.filter(stock__gt=0)
-        form = BuscarProductoForm(self.request.GET)
+        queryset = Producto.objects.all()
+        categoria = self.request.GET.get('categoria')
+        busqueda = self.request.GET.get('buscar')
         
-        if form.is_valid():
-            # Filtro por búsqueda
-            busqueda = form.cleaned_data.get('busqueda')
-            if busqueda:
-                queryset = queryset.filter(
-                    Q(nombre__icontains=busqueda) | 
-                    Q(descripcion__icontains=busqueda) |
-                    Q(categoria__icontains=busqueda)
-                )
+        if categoria:
+            queryset = queryset.filter(categoria=categoria)
             
-            # Filtro por categoría
-            categoria = form.cleaned_data.get('categoria')
-            if categoria:
-                queryset = queryset.filter(categoria=categoria)
+        if busqueda:
+            queryset = queryset.filter(
+                Q(nombre__icontains=busqueda) |
+                Q(descripcion__icontains=busqueda)
+            )
             
-            # Filtro por precio
-            precio_min = form.cleaned_data.get('precio_min')
-            precio_max = form.cleaned_data.get('precio_max')
-            if precio_min:
-                queryset = queryset.filter(precio__gte=precio_min)
-            if precio_max:
-                queryset = queryset.filter(precio__lte=precio_max)
-            
-            # Ordenamiento
-            ordenar_por = form.cleaned_data.get('ordenar_por')
-            if ordenar_por:
-                queryset = queryset.order_by(ordenar_por)
-            else:
-                queryset = queryset.order_by('-id')
-        else:
-            queryset = queryset.order_by('-id')
-        
         return queryset
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form_busqueda'] = BuscarProductoForm(self.request.GET)
         context['categorias'] = Producto.objects.values_list('categoria', flat=True).distinct()
-        context['vendedores'] = CuentaVendedor.objects.all()
         return context
 
 class ProductoDetailView(DetailView):
