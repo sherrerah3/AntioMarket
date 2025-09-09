@@ -254,26 +254,34 @@ class EditarUsuarioForm(forms.ModelForm):
         return email
 
 class AgregarUbicacionForm(forms.ModelForm):
-    """Formulario para agregar nuevas ubicaciones a vendedores"""
+    municipio = forms.ChoiceField(
+        choices=[
+            ('', 'Seleccione un municipio'),
+            ('Medellín', 'Medellín'),
+            ('Bello', 'Bello'),
+            ('Envigado', 'Envigado'),
+            ('Itagüí', 'Itagüí'),
+            ('Sabaneta', 'Sabaneta'),
+            ('La Estrella', 'La Estrella'),
+            ('Caldas', 'Caldas'),
+            ('Copacabana', 'Copacabana'),
+            ('Girardota', 'Girardota'),
+            ('Barbosa', 'Barbosa'),
+        ],
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+
     class Meta:
         model = UbicacionVendedor
-        fields = ['departamento', 'municipio', 'direccion', 'descripcion_zona']
+        fields = ['municipio', 'direccion', 'descripcion_zona']
         widgets = {
-            'departamento': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Ej: Antioquia'
-            }),
-            'municipio': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Ej: Medellín'
-            }),
             'direccion': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Dirección específica'
+                'placeholder': 'Ingresa la dirección específica'
             }),
             'descripcion_zona': forms.Textarea(attrs={
                 'class': 'form-control',
                 'rows': 3,
-                'placeholder': 'Describe la zona de esta ubicación'
+                'placeholder': 'Describe la zona (referencias, puntos cercanos, etc.)'
             })
         }

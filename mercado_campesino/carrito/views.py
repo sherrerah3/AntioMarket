@@ -227,7 +227,7 @@ class ProcesarPedidoView(LoginRequiredMixin, View):
         return Pedido.objects.create(
             cliente=cuenta_cliente,
             total=total,
-            estado='pendiente'
+            estado='completado'
         )
     
     def _procesar_items_carrito(self, items, pedido):

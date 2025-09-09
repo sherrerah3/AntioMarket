@@ -24,4 +24,7 @@ urlpatterns = [
     # Ver vendedores disponibles
     path('vendedores/', views.ListaVendedoresView.as_view(), name='lista_vendedores'),
     path('vendedor/<int:pk>/', views.DetalleVendedorView.as_view(), name='detalle_vendedor'),
+
+    # Agregar ubicación
+    path('agregar-ubicacion/', views.AgregarUbicacionView.as_view(), name='agregar_ubicacion'),
 ]

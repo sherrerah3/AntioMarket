@@ -5,7 +5,8 @@ from django.views.generic import CreateView, DetailView, UpdateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.contrib import messages
-from django.db import transaction
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import CreateView
 from .models import Usuario, CuentaCliente, CuentaVendedor, UbicacionVendedor
 from productos.models import Producto
 from .forms import (
@@ -18,6 +19,30 @@ from .forms import (
 )
 
 # Create your views here.
+
+class AgregarUbicacionView(LoginRequiredMixin, CreateView):
+    model = UbicacionVendedor
+    form_class = AgregarUbicacionForm
+    template_name = 'cuentas/agregar_ubicacion.html'
+    success_url = reverse_lazy('cuentas:perfil_vendedor')
+
+    def form_valid(self, form):
+        try:
+            ubicacion = form.save(commit=False)
+            ubicacion.vendedor = self.request.user.cuentavendedor
+            ubicacion.departamento = 'Antioquia'
+            ubicacion.save()
+            messages.success(self.request, 'Nueva ubicación agregada exitosamente.')
+            return super().form_valid(form)
+        except Exception as e:
+            print(f"Error al guardar ubicación: {str(e)}")  # Para debugging
+            messages.error(self.request, 'Error al guardar la ubicación.')
+            return self.form_invalid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Agregar Nueva Ubicación'
+        return context
 
 class ListaVendedoresView(ListView):
     model = CuentaVendedor

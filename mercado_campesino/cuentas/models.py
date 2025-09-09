@@ -27,10 +27,10 @@ class CuentaVendedor(models.Model):
 
 class UbicacionVendedor(models.Model):
     vendedor = models.ForeignKey(CuentaVendedor, on_delete=models.CASCADE)
-    departamento = models.CharField(max_length=100)
-    municipio = models.CharField(max_length=100)
+    departamento = models.CharField(max_length=50, default='Antioquia')
+    municipio = models.CharField(max_length=50)
     direccion = models.CharField(max_length=200)
-    descripcion_zona = models.TextField()
-    
+    descripcion_zona = models.TextField(blank=True)
+
     def __str__(self):
-        return f"{self.departamento} - {self.municipio}"
+        return f"{self.municipio}, {self.direccion}"
