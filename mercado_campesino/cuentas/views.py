@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView
+from django.db import transaction  
 from .models import Usuario, CuentaCliente, CuentaVendedor, UbicacionVendedor
 from productos.models import Producto
 from .forms import (
