@@ -7,9 +7,13 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView
-from django.db import transaction  
+from django.db import transaction
+from django.db import models
 from .models import Usuario, CuentaCliente, CuentaVendedor, UbicacionVendedor
 from productos.models import Producto
+from carrito.models import Carrito, CarritoItem
+from pedidos.models import Pedido
+from reseñas.models import Reseña
 from .forms import (
     RegistroClienteForm, 
     RegistroVendedorForm,
@@ -157,6 +161,38 @@ class PerfilClienteView(LoginRequiredMixin, DetailView):
     
     def get_object(self):
         return self.request.user.cuentacliente
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cliente = self.get_object()
+        
+        # Estadísticas del cliente
+        # 1. Número de compras realizadas (pedidos completados)
+        compras_realizadas = Pedido.objects.filter(
+            cliente=cliente,
+            estado='completado'
+        ).count()
+        
+        # 2. Productos en carrito actual
+        try:
+            carrito = Carrito.objects.get(cliente=cliente)
+            productos_en_carrito = carrito.carritoitem_set.aggregate(
+                total_cantidad=models.Sum('cantidad')
+            )['total_cantidad'] or 0
+        except Carrito.DoesNotExist:
+            productos_en_carrito = 0
+        
+        # 3. Reseñas escritas
+        reseñas_escritas = Reseña.objects.filter(cliente=cliente).count()
+        
+        # Agregar estadísticas al contexto
+        context['estadisticas'] = {
+            'compras_realizadas': compras_realizadas,
+            'productos_en_carrito': productos_en_carrito,
+            'reseñas_escritas': reseñas_escritas,
+        }
+        
+        return context
 
 class PerfilVendedorView(LoginRequiredMixin, DetailView):
     model = CuentaVendedor

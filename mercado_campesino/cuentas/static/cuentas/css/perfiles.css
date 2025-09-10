@@ -116,8 +116,26 @@
 .text-center .btn {
     margin: 0 5px;
     min-width: 150px;
+    position: relative;
 }
 
 .text-center .btn i {
     margin-right: 8px;
+}
+
+.text-center .btn .badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 0.75em;
+}
+
+/* Animación para estadísticas */
+.estadistica-card:hover .estadistica-numero {
+    transform: scale(1.1);
+}
+
+.estadistica-card:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
 }

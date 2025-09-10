@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Reseña de {{ reseña.producto.nombre }} - AntioMarket{% endblock %}
+
+{% block extra_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="{% static 'reseñas/css/reseñas.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'productos:home' %}">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'reseñas:lista_reseñas' %}">Reseñas</a></li>
+            <li class="breadcrumb-item active">{{ reseña.producto.nombre }}</li>
+        </ol>
+    </nav>
+
+    <div class="detalle-reseña-container">
+        <div class="reseña-detalle-card">
+            <div class="reseña-header-detalle">
+                <div class="producto-info-detalle">
+                    <h3>Reseña de: <a href="{% url 'productos:detalle_producto' reseña.producto.pk %}">{{ reseña.producto.nombre }}</a></h3>
+                    <div class="calificacion-detalle">
+                        {% for i in "12345" %}
+                            {% if forloop.counter <= reseña.calificacion %}
+                                <i class="fas fa-star"></i>
+                            {% else %}
+                                <i class="far fa-star"></i>
+                            {% endif %}
+                        {% endfor %}
+                        <span class="calificacion-numero-detalle">({{ reseña.calificacion }}/5)</span>
+                    </div>
+                </div>
+            </div>
+
+            {% if reseña.contenido %}
+            <div class="reseña-contenido-detalle">
+                <h5>Comentario:</h5>
+                <p>{{ reseña.contenido }}</p>
+            </div>
+            {% endif %}
+
+            <div class="cliente-info-detalle">
+                <h6>Escrito por:</h6>
+                <p><i class="fas fa-user me-2"></i>{{ reseña.cliente.usuario.first_name }} {{ reseña.cliente.usuario.last_name }}</p>
+            </div>
+
+            <div class="acciones-detalle">
+                <a href="{% url 'reseñas:lista_reseñas' %}" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-1"></i>Volver a Reseñas
+                </a>
+                <a href="{% url 'productos:detalle_producto' reseña.producto.pk %}" class="btn btn-success">
+                    <i class="fas fa-eye me-1"></i>Ver Producto
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

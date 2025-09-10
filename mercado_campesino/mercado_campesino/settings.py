@@ -127,6 +127,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'productos' / 'static',
     BASE_DIR / 'cuentas' / 'static',
     BASE_DIR / 'carrito' / 'static',
+    BASE_DIR / 'reseñas' / 'static',
 ]
 
 # Default primary key field type

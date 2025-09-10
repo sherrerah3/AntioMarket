@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}Escribir Reseña - AntioMarket{% endblock %}
+
+{% block extra_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="{% static 'reseñas/css/reseñas.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="crear-reseña-container">
+        <div class="crear-reseña-header">
+            <h2><i class="fas fa-star me-2"></i>Escribir Reseña</h2>
+            {% if producto %}
+                <p class="lead">Comparte tu calificación sobre <strong>{{ producto.nombre }}</strong></p>
+            {% else %}
+                <p class="lead">Califica productos que hayas comprado</p>
+            {% endif %}
+        </div>
+
+        {% if not tiene_productos_para_reseñar and not producto %}
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle me-2"></i>
+            <strong>No tienes productos para reseñar.</strong><br>
+            Solo puedes reseñar productos que hayas comprado y que no hayas reseñado previamente.
+            <br><br>
+            <a href="{% url 'productos:home' %}" class="btn btn-success mt-2">
+                <i class="fas fa-shopping-cart me-1"></i>Ver Productos
+            </a>
+        </div>
+        {% else %}
+        <div class="form-container">
+            <form method="post">
+                {% csrf_token %}
+                
+                {% if not producto %}
+                <div class="mb-3">
+                    <label for="id_producto" class="form-label">{{ form.producto.label }}</label>
+                    {{ form.producto }}
+                    {% if form.producto.errors %}
+                        <div class="text-danger">{{ form.producto.errors }}</div>
+                    {% endif %}
+                    <small class="form-text text-muted">Solo aparecen productos que has comprado y no has reseñado.</small>
+                </div>
+                {% endif %}
+
+                <div class="mb-3">
+                    <label for="id_calificacion" class="form-label">{{ form.calificacion.label }} *</label>
+                    {{ form.calificacion }}
+                    {% if form.calificacion.errors %}
+                        <div class="text-danger">{{ form.calificacion.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_contenido" class="form-label">{{ form.contenido.label }}</label>
+                    {{ form.contenido }}
+                    {% if form.contenido.errors %}
+                        <div class="text-danger">{{ form.contenido.errors }}</div>
+                    {% endif %}
+                    <small class="form-text text-muted">El comentario es opcional. La calificación con estrellas es lo más importante.</small>
+                </div>
+
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a href="{% url 'reseñas:lista_reseñas' %}" class="btn btn-outline-secondary me-md-2">
+                        <i class="fas fa-times me-1"></i>Cancelar
+                    </a>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-star me-1"></i>Publicar Reseña
+                    </button>
+                </div>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

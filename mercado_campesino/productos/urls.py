@@ -7,7 +7,6 @@ urlpatterns = [
     # Páginas públicas
     path('', views.HomeView.as_view(), name='home'),
     path('nosotros/', views.nosotros, name='nosotros'),
-    path('productos/', views.ProductoListView.as_view(), name='lista_productos'),
     path('producto/<int:pk>/', views.ProductoDetailView.as_view(), name='detalle_producto'),
     
     # Productos por vendedor y categoría

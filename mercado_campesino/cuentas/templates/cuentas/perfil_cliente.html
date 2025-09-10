@@ -55,15 +55,15 @@
             <h4><i class="fas fa-chart-bar me-2"></i>Estadísticas</h4>
             <div class="estadisticas">
                 <div class="estadistica-card">
-                    <div class="estadistica-numero">0</div>
+                    <div class="estadistica-numero">{{ estadisticas.compras_realizadas }}</div>
                     <div>Compras Realizadas</div>
                 </div>
                 <div class="estadistica-card">
-                    <div class="estadistica-numero">0</div>
+                    <div class="estadistica-numero">{{ estadisticas.productos_en_carrito }}</div>
                     <div>Productos en Carrito</div>
                 </div>
                 <div class="estadistica-card">
-                    <div class="estadistica-numero">0</div>
+                    <div class="estadistica-numero">{{ estadisticas.reseñas_escritas }}</div>
                     <div>Reseñas Escritas</div>
                 </div>
             </div>
@@ -72,7 +72,11 @@
         <!-- Historial de Compras -->
         <div class="info-section">
             <h4><i class="fas fa-shopping-cart me-2"></i>Historial de Compras</h4>
-            <p class="text-muted">Aún no has realizado compras.</p>
+            {% if estadisticas.compras_realizadas > 0 %}
+                <p class="text-muted">Has realizado {{ estadisticas.compras_realizadas }} compra{{ estadisticas.compras_realizadas|pluralize }} exitosa{{ estadisticas.compras_realizadas|pluralize }}.</p>
+            {% else %}
+                <p class="text-muted">Aún no has realizado compras.</p>
+            {% endif %}
             <a href="{% url 'productos:home' %}" class="btn-editar">
                 <i class="fas fa-shopping-basket me-2"></i>Explorar Productos
             </a>
@@ -85,7 +89,19 @@
             </a>
             <a href="{% url 'carrito:ver_carrito' %}" class="btn-editar">
                 <i class="fas fa-shopping-cart me-2"></i>Ver Carrito
+                {% if estadisticas.productos_en_carrito > 0 %}
+                    <span class="badge bg-primary ms-1">{{ estadisticas.productos_en_carrito }}</span>
+                {% endif %}
             </a>
+            {% if estadisticas.reseñas_escritas > 0 %}
+            <a href="{% url 'reseñas:lista_reseñas' %}" class="btn-editar">
+                <i class="fas fa-star me-2"></i>Mis Reseñas
+            </a>
+            {% else %}
+            <a href="{% url 'reseñas:crear_reseña' %}" class="btn-editar">
+                <i class="fas fa-star me-2"></i>Escribir Primera Reseña
+            </a>
+            {% endif %}
         </div>
     </div>
 </div>
