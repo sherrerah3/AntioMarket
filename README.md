@@ -8,7 +8,7 @@ Plataforma digital que conecta productores campesinos de Antioquia con consumido
 
 1. **Clonar el repositorio**
 ```bash
-git clone <url-del-repositorio>
+git clone <https://github.com/sherrerah3/AntioMarket>
 cd AntioMarket/mercado_campesino
 ```
 
