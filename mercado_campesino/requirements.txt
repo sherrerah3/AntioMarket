@@ -1,9 +1,2 @@
 Django>=4.2.0,<5.0.0
 Pillow>=10.0.0  # Para el manejo de imágenes
-django-crispy-forms>=2.0  # Para mejorar el renderizado de formularios
-crispy-bootstrap5>=0.7  # Para el tema de Bootstrap 5
-python-dotenv>=1.0.0  # Para variables de entorno
-psycopg2>=2.9.9  # Para PostgreSQL (opcional si usas SQLite)
-django-storages>=1.14  # Para almacenamiento de archivos (opcional)
-gunicorn>=21.2.0  # Para despliegue en producción
-whitenoise>=6.5.0  # Para servir archivos estáticos

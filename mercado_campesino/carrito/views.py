@@ -1,11 +1,9 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.http import JsonResponse
-from django.views import View
 from django.db import transaction
 from django.views.generic import TemplateView, View
-from django.shortcuts import redirect
 from productos.models import Producto
 from cuentas.models import CuentaCliente
 from pedidos.models import Pedido, DetallePedido

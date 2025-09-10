@@ -1,17 +1,19 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.shortcuts import redirect
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import CreateView, DetailView, UpdateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView
 from django.db import transaction
 from django.db import models
-from .models import Usuario, CuentaCliente, CuentaVendedor, UbicacionVendedor
+from .models import (
+    Usuario, 
+    CuentaCliente, 
+    CuentaVendedor, 
+    UbicacionVendedor
+)
 from productos.models import Producto
-from carrito.models import Carrito, CarritoItem
+from carrito.models import Carrito
 from pedidos.models import Pedido
 from reseñas.models import Reseña
 from .forms import (
@@ -19,7 +21,6 @@ from .forms import (
     RegistroVendedorForm,
     EditarPerfilClienteForm,
     EditarPerfilVendedorForm,
-    EditarUsuarioForm,
     AgregarUbicacionForm
 )
 
