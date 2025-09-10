@@ -50,7 +50,7 @@ python manage.py runserver
 
 ## Tecnologías
 
-- Django 5.2.4
+- Django 4.2
 - SQLite (base de datos)
 - Bootstrap 5.3
 - Font Awesome
