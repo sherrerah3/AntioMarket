@@ -34,12 +34,20 @@
                         <strong class="precio-producto">${{ item.producto.precio }}</strong>
                     </div>
                     <div class="col-md-2">
-                        <div class="cantidad-controls">
-                            <form method="post" action="{% url 'carrito:actualizar_cantidad' item.id %}" class="d-inline">
+                        <div class="cantidad-controls d-flex align-items-center">
+                            <form method="post" action="{% url 'carrito:actualizar_cantidad' item.id %}" class="d-flex align-items-center">
                                 {% csrf_token %}
-                                <input type="number" name="cantidad" value="{{ item.cantidad }}" min="1" class="form-control cantidad-input d-inline">
-                                <button type="submit" class="btn btn-sm btn-outline-primary btn-actualizar">
-                                    <i class="fas fa-sync"></i>
+                                <input type="hidden" name="accion" value="decrementar">
+                                <button type="submit" class="btn btn-sm btn-outline-secondary" {% if item.cantidad <= 1 %}title="Eliminar del carrito"{% endif %}>
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </form>
+                            <span class="mx-2">{{ item.cantidad }}</span>
+                            <form method="post" action="{% url 'carrito:actualizar_cantidad' item.id %}" class="d-flex align-items-center">
+                                {% csrf_token %}
+                                <input type="hidden" name="accion" value="incrementar">
+                                <button type="submit" class="btn btn-sm btn-outline-secondary" {% if item.cantidad >= item.producto.stock %}disabled{% endif %}>
+                                    <i class="fas fa-plus"></i>
                                 </button>
                             </form>
                         </div>

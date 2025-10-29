@@ -140,10 +140,35 @@
 .cantidad-controls {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
 }
 
-.btn-actualizar {
+.cantidad-controls button {
     padding: 0.25rem 0.5rem;
-    font-size: 0.75rem;
+    font-size: 0.875rem;
+    min-width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.cantidad-controls button:hover:not(:disabled) {
+    background-color: #6c757d;
+    color: white;
+    border-color: #6c757d;
+}
+
+.cantidad-controls span {
+    min-width: 2rem;
+    text-align: center;
+    font-weight: 500;
+}
+
+.cantidad-controls button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }

@@ -16,7 +16,8 @@ class HomeView(ListView):
     context_object_name = 'productos'
     
     def get_queryset(self):
-        queryset = Producto.objects.all()
+        # Filtrar productos con stock > 0
+        queryset = Producto.objects.filter(stock__gt=0)
         form = BuscarProductoForm(self.request.GET)
         
         # Obtener filtros de categoría y búsqueda
@@ -72,16 +73,15 @@ class ProductoDetailView(DetailView):
                 carrito_item = CarritoItem.objects.filter(carrito=carrito, producto=self.object).first()
                 if carrito_item:
                     context['cantidad_en_carrito'] = carrito_item.cantidad
-                    context['stock_disponible'] = self.object.stock - carrito_item.cantidad
                 else:
                     context['cantidad_en_carrito'] = 0
-                    context['stock_disponible'] = self.object.stock
             except Carrito.DoesNotExist:
                 context['cantidad_en_carrito'] = 0
-                context['stock_disponible'] = self.object.stock
         else:
             context['cantidad_en_carrito'] = 0
-            context['stock_disponible'] = self.object.stock
+            
+        # Mostrar el stock real disponible
+        context['stock_disponible'] = self.object.stock
             
         return context
 

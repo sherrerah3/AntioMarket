@@ -85,7 +85,7 @@ class AgregarProductoView(LoginRequiredMixin, CarritoMixin, View):
             # Verificar que no exceda el stock disponible
             nueva_cantidad = item.cantidad + 1
             if nueva_cantidad > producto.stock:
-                messages.error(request, f'No puedes agregar más unidades. Solo hay {producto.stock} disponibles y ya tienes {item.cantidad} en tu carrito.')
+                messages.error(request, f'No puedes agregar más unidades. Solo hay {producto.stock} disponibles.')
                 return redirect('productos:detalle_producto', pk=producto_id)
             
             # Si ya existe, incrementar la cantidad
@@ -112,19 +112,22 @@ class ActualizarCantidadView(LoginRequiredMixin, CarritoMixin, View):
             return redirect('productos:home')
         
         item = get_object_or_404(CarritoItem, id=item_id, carrito__cliente=cuenta_cliente)
+        accion = request.POST.get('accion')
         
-        cantidad = int(request.POST.get('cantidad', 1))
-        if cantidad > 0:
-            # Verificar stock disponible
-            if cantidad > item.producto.stock:
-                messages.error(request, f'No puedes agregar {cantidad} unidades. Solo hay {item.producto.stock} disponibles de {item.producto.nombre}.')
+        if accion == 'incrementar':
+            nueva_cantidad = item.cantidad + 1
+            if nueva_cantidad > item.producto.stock:
+                messages.error(request, f'No puedes agregar más unidades. Solo hay {item.producto.stock} disponibles.')
             else:
-                item.cantidad = cantidad
+                item.cantidad = nueva_cantidad
                 item.save()
-                messages.success(request, 'Cantidad actualizada correctamente.')
-        else:
-            item.delete()
-            messages.success(request, 'Producto eliminado del carrito.')
+        elif accion == 'decrementar':
+            if item.cantidad > 1:
+                item.cantidad -= 1
+                item.save()
+            else:
+                item.delete()
+                messages.success(request, 'Producto eliminado del carrito.')
         
         return redirect('carrito:ver_carrito')
 
@@ -230,16 +233,19 @@ class ProcesarPedidoView(LoginRequiredMixin, View):
     
     def _procesar_items_carrito(self, items, pedido):
         for item in items:
-            if item.cantidad > item.producto.stock:
-                raise ValueError(f'Stock insuficiente para {item.producto.nombre}')
+            producto = Producto.objects.select_for_update().get(id=item.producto.id)
+            
+            if item.cantidad > producto.stock:
+                raise ValueError(f'Stock insuficiente para {producto.nombre}. Quedan {producto.stock} unidades.')
             
             DetallePedido.objects.create(
                 pedido=pedido,
-                producto=item.producto,
+                producto=producto,
                 cantidad=item.cantidad,
-                precio_unitario=item.producto.precio,
-                subtotal=item.producto.precio * item.cantidad
+                precio_unitario=producto.precio,
+                subtotal=producto.precio * item.cantidad
             )
             
-            item.producto.stock -= item.cantidad
-            item.producto.save()
+            # Actualizar el stock
+            producto.stock -= item.cantidad
+            producto.save()
