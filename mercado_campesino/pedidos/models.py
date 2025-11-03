@@ -19,6 +19,18 @@ class Pedido(models.Model):
 
     def __str__(self):
         return f"Pedido #{self.id} - {self.cliente.username}"
+        
+    def generar_comprobante(self, estrategia_comprobante) -> bytes:
+        """
+        Genera un comprobante de pago usando la estrategia proporcionada.
+        
+        Args:
+            estrategia_comprobante: Una instancia de ComprobantePagoStrategy
+            
+        Returns:
+            bytes: El contenido del PDF generado
+        """
+        return estrategia_comprobante.generar_comprobante(self)
 
 class DetallePedido(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, related_name='detalles')
