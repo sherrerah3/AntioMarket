@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Agregar Producto - AntioMarket{% endblock %}
+{% block title %}{% trans "Agregar Producto - AntioMarket" %}{% endblock %}
 
 {% block extra_css %}
 {% load static %}
@@ -27,8 +28,8 @@ select:valid {
 <div class="container">
     <div class="registro-container vendedor">
         <div class="registro-header">
-            <h2><i class="fas fa-plus-circle"></i> Agregar Nuevo Producto</h2>
-            <p class="text-muted">Comparte tus productos con la comunidad de AntioMarket</p>
+            <h2><i class="fas fa-plus-circle"></i> {% trans "Agregar Nuevo Producto" %}</h2>
+            <p class="text-muted">{% trans "Comparte tus productos con la comunidad de AntioMarket" %}</p>
         </div>
         
         {% if messages %}
@@ -45,7 +46,7 @@ select:valid {
             
             <!-- Información Básica del Producto -->
             <div class="form-section">
-                <h4 class="section-title"><i class="fas fa-info-circle me-2"></i>Información Básica</h4>
+                <h4 class="section-title"><i class="fas fa-info-circle me-2"></i>{% trans "Información Básica" %}</h4>
                 
                 <div class="row">
                     <div class="col-md-8 mb-3">
@@ -77,14 +78,14 @@ select:valid {
                         </div>
                     {% endif %}
                     <small class="form-text text-muted">
-                        Describe tu producto de manera detallada: origen, características, beneficios, etc.
+                        {% trans "Describe tu producto de manera detallada: origen, características, beneficios, etc." %}
                     </small>
                 </div>
             </div>
             
             <!-- Precio y Stock -->
             <div class="form-section">
-                <h4 class="section-title"><i class="fas fa-dollar-sign me-2"></i>Precio y Disponibilidad</h4>
+                <h4 class="section-title"><i class="fas fa-dollar-sign me-2"></i>{% trans "Precio y Disponibilidad" %}</h4>
                 
                 <div class="row">
                     <div class="col-md-6 mb-3">
@@ -103,7 +104,7 @@ select:valid {
                         <label for="{{ form.stock.id_for_label }}" class="form-label">{{ form.stock.label }}</label>
                         <div class="input-group">
                             {{ form.stock }}
-                            <span class="input-group-text">unidades</span>
+                            <span class="input-group-text">{% trans "unidades" %}</span>
                         </div>
                         {% if form.stock.errors %}
                             <div class="invalid-feedback d-block">
@@ -116,7 +117,7 @@ select:valid {
             
             <!-- Imagen del Producto -->
             <div class="form-section">
-                <h4 class="section-title"><i class="fas fa-camera me-2"></i>Imagen del Producto</h4>
+                <h4 class="section-title"><i class="fas fa-camera me-2"></i>{% trans "Imagen del Producto" %}</h4>
                 
                 <div class="mb-3">
                     <label for="{{ form.imagen.id_for_label }}" class="form-label">{{ form.imagen.label }}</label>
@@ -127,7 +128,7 @@ select:valid {
                         </div>
                     {% endif %}
                     <small class="form-text text-muted">
-                        Sube una imagen atractiva de tu producto. Formatos permitidos: JPG, PNG, GIF (máx. 5MB)
+                        {% trans "Sube una imagen atractiva de tu producto. Formatos permitidos: JPG, PNG, GIF (máx. 5MB)" %}
                     </small>
                 </div>
             </div>
@@ -135,23 +136,23 @@ select:valid {
             <!-- Botones de Acción -->
             <div class="d-flex justify-content-between mt-4">
                 <a href="{% url 'cuentas:perfil_vendedor' %}" class="btn btn-secondary">
-                    <i class="fas fa-arrow-left me-2"></i>Cancelar
+                    <i class="fas fa-arrow-left me-2"></i>{% trans "Cancelar" %}
                 </a>
                 <button type="submit" class="btn btn-registro vendedor">
-                    <i class="fas fa-plus-circle me-2"></i>Agregar Producto
+                    <i class="fas fa-plus-circle me-2"></i>{% trans "Agregar Producto" %}
                 </button>
             </div>
         </form>
         
         <!-- Información adicional -->
         <div class="mt-4 p-3 bg-light rounded">
-            <h6><i class="fas fa-lightbulb me-2"></i>Consejos para mejores ventas:</h6>
+            <h6><i class="fas fa-lightbulb me-2"></i>{% trans "Consejos para mejores ventas" %}:</h6>
             <ul class="mb-0">
-                <li>Usa nombres descriptivos y atractivos</li>
-                <li>Incluye fotos de alta calidad</li>
-                <li>Describe el origen y beneficios de tu producto</li>
-                <li>Mantén precios competitivos</li>
-                <li>Actualiza el stock regularmente</li>
+                <li>{% trans "Usa nombres descriptivos y atractivos" %}</li>
+                <li>{% trans "Incluye fotos de alta calidad" %}</li>
+                <li>{% trans "Describe el origen y beneficios de tu producto" %}</li>
+                <li>{% trans "Mantén precios competitivos" %}</li>
+                <li>{% trans "Actualiza el stock regularmente" %}</li>
             </ul>
         </div>
     </div>

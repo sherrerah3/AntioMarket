@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Perfil Cliente - AntioMarket{% endblock %}
+{% block title %}{% trans "Perfil Cliente - AntioMarket" %}{% endblock %}
 
 {% block extra_css %}
 {% load static %}
@@ -12,8 +13,8 @@
 <div class="container">
     <div class="perfil-container">
         <div class="perfil-header">
-            <h2><i class="fas fa-user"></i> Perfil de Cliente</h2>
-            <p class="text-muted">Bienvenido a tu perfil</p>
+            <h2><i class="fas fa-user"></i> {% trans "Perfil de Cliente" %}</h2>
+            <p class="text-muted">{% trans "Bienvenido a tu perfil" %}</p>
         </div>
         
         {% if messages %}
@@ -27,13 +28,13 @@
         
         <!-- Información Personal -->
         <div class="info-section">
-            <h4><i class="fas fa-user me-2"></i>Información Personal</h4>
+            <h4><i class="fas fa-user me-2"></i>{% trans "Información Personal" %}</h4>
             <div class="info-item">
-                <span class="info-label">Nombre:</span>
+                <span class="info-label">{% trans "Nombre" %}:</span>
                 {{ cuenta.usuario.first_name }} {{ cuenta.usuario.last_name }}
             </div>
             <div class="info-item">
-                <span class="info-label">Usuario:</span>
+                <span class="info-label">{% trans "Usuario" %}:</span>
                 {{ cuenta.usuario.username }}
             </div>
             <div class="info-item">
@@ -41,65 +42,65 @@
                 {{ cuenta.usuario.email }}
             </div>
             <div class="info-item">
-                <span class="info-label">Dirección:</span>
+                <span class="info-label">{% trans "Dirección" %}:</span>
                 {{ cuenta.direccion }}
             </div>
             <div class="info-item">
-                <span class="info-label">Miembro desde:</span>
+                <span class="info-label">{% trans "Miembro desde" %}:</span>
                 {{ cuenta.usuario.date_joined|date:"d/m/Y" }}
             </div>
         </div>
         
         <!-- Estadísticas del Cliente -->
         <div class="info-section">
-            <h4><i class="fas fa-chart-bar me-2"></i>Estadísticas</h4>
+            <h4><i class="fas fa-chart-bar me-2"></i>{% trans "Estadísticas" %}</h4>
             <div class="estadisticas">
                 <div class="estadistica-card">
                     <div class="estadistica-numero">{{ estadisticas.compras_realizadas }}</div>
-                    <div>Compras Realizadas</div>
+                    <div>{% trans "Compras Realizadas" %}</div>
                 </div>
                 <div class="estadistica-card">
                     <div class="estadistica-numero">{{ estadisticas.productos_en_carrito }}</div>
-                    <div>Productos en Carrito</div>
+                    <div>{% trans "Productos en Carrito" %}</div>
                 </div>
                 <div class="estadistica-card">
                     <div class="estadistica-numero">{{ estadisticas.reseñas_escritas }}</div>
-                    <div>Reseñas Escritas</div>
+                    <div>{% trans "Reseñas Escritas" %}</div>
                 </div>
             </div>
         </div>
         
         <!-- Historial de Compras -->
         <div class="info-section">
-            <h4><i class="fas fa-shopping-cart me-2"></i>Historial de Compras</h4>
+            <h4><i class="fas fa-shopping-cart me-2"></i>{% trans "Historial de Compras" %}</h4>
             {% if estadisticas.compras_realizadas > 0 %}
-                <p class="text-muted">Has realizado {{ estadisticas.compras_realizadas }} compra{{ estadisticas.compras_realizadas|pluralize }} exitosa{{ estadisticas.compras_realizadas|pluralize }}.</p>
+                <p class="text-muted">{% trans "Has realizado" %} {{ estadisticas.compras_realizadas }} {% trans "compra" %}{{ estadisticas.compras_realizadas|pluralize }} {% trans "exitosa" %}{{ estadisticas.compras_realizadas|pluralize }}.</p>
             {% else %}
-                <p class="text-muted">Aún no has realizado compras.</p>
+                <p class="text-muted">{% trans "Aún no has realizado compras." %}</p>
             {% endif %}
             <a href="{% url 'productos:home' %}" class="btn-editar">
-                <i class="fas fa-shopping-basket me-2"></i>Explorar Productos
+                <i class="fas fa-shopping-basket me-2"></i>{% trans "Explorar Productos" %}
             </a>
         </div>
         
         <!-- Botones de Acción -->
         <div class="text-center mt-4">
             <a href="{% url 'cuentas:editar_perfil_cliente' %}" class="btn-editar">
-                <i class="fas fa-edit me-2"></i>Editar Perfil
+                <i class="fas fa-edit me-2"></i>{% trans "Editar Perfil" %}
             </a>
             <a href="{% url 'carrito:ver_carrito' %}" class="btn-editar">
-                <i class="fas fa-shopping-cart me-2"></i>Ver Carrito
+                <i class="fas fa-shopping-cart me-2"></i>{% trans "Ver Carrito" %}
                 {% if estadisticas.productos_en_carrito > 0 %}
                     <span class="badge bg-primary ms-1">{{ estadisticas.productos_en_carrito }}</span>
                 {% endif %}
             </a>
             {% if estadisticas.reseñas_escritas > 0 %}
             <a href="{% url 'reseñas:lista_reseñas' %}" class="btn-editar">
-                <i class="fas fa-star me-2"></i>Mis Reseñas
+                <i class="fas fa-star me-2"></i>{% trans "Mis Reseñas" %}
             </a>
             {% else %}
             <a href="{% url 'reseñas:crear_reseña' %}" class="btn-editar">
-                <i class="fas fa-star me-2"></i>Escribir Primera Reseña
+                <i class="fas fa-star me-2"></i>{% trans "Escribir Primera Reseña" %}
             </a>
             {% endif %}
         </div>

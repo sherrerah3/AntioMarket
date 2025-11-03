@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Escribir Reseña - AntioMarket{% endblock %}
+{% block title %}{% trans "Escribir Reseña - AntioMarket" %}{% endblock %}
 
 {% block extra_css %}
 {% load static %}
@@ -12,22 +13,22 @@
 <div class="container">
     <div class="crear-reseña-container">
         <div class="crear-reseña-header">
-            <h2><i class="fas fa-star me-2"></i>Escribir Reseña</h2>
+            <h2><i class="fas fa-star me-2"></i>{% trans "Escribir Reseña" %}</h2>
             {% if producto %}
-                <p class="lead">Comparte tu calificación sobre <strong>{{ producto.nombre }}</strong></p>
+                <p class="lead">{% trans "Comparte tu calificación sobre" %} <strong>{{ producto.nombre }}</strong></p>
             {% else %}
-                <p class="lead">Califica productos que hayas comprado</p>
+                <p class="lead">{% trans "Califica productos que hayas comprado" %}</p>
             {% endif %}
         </div>
 
         {% if not tiene_productos_para_reseñar and not producto %}
         <div class="alert alert-info">
             <i class="fas fa-info-circle me-2"></i>
-            <strong>No tienes productos para reseñar.</strong><br>
-            Solo puedes reseñar productos que hayas comprado y que no hayas reseñado previamente.
+            <strong>{% trans "No tienes productos para reseñar." %}</strong><br>
+            {% trans "Solo puedes reseñar productos que hayas comprado y que no hayas reseñado previamente." %}
             <br><br>
             <a href="{% url 'productos:home' %}" class="btn btn-success mt-2">
-                <i class="fas fa-shopping-cart me-1"></i>Ver Productos
+                <i class="fas fa-shopping-cart me-1"></i>{% trans "Ver Productos" %}
             </a>
         </div>
         {% else %}
@@ -42,7 +43,7 @@
                     {% if form.producto.errors %}
                         <div class="text-danger">{{ form.producto.errors }}</div>
                     {% endif %}
-                    <small class="form-text text-muted">Solo aparecen productos que has comprado y no has reseñado.</small>
+                    <small class="form-text text-muted">{% trans "Solo aparecen productos que has comprado y no has reseñado." %}</small>
                 </div>
                 {% endif %}
 
@@ -60,15 +61,15 @@
                     {% if form.contenido.errors %}
                         <div class="text-danger">{{ form.contenido.errors }}</div>
                     {% endif %}
-                    <small class="form-text text-muted">El comentario es opcional. La calificación con estrellas es lo más importante.</small>
+                    <small class="form-text text-muted">{% trans "El comentario es opcional. La calificación con estrellas es lo más importante." %}</small>
                 </div>
 
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <a href="{% url 'reseñas:lista_reseñas' %}" class="btn btn-outline-secondary me-md-2">
-                        <i class="fas fa-times me-1"></i>Cancelar
+                        <i class="fas fa-times me-1"></i>{% trans "Cancelar" %}
                     </a>
                     <button type="submit" class="btn btn-success">
-                        <i class="fas fa-star me-1"></i>Publicar Reseña
+                        <i class="fas fa-star me-1"></i>{% trans "Publicar Reseña" %}
                     </button>
                 </div>
             </form>

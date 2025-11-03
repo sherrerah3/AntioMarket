@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}AntioMarket - Mercado Campesino{% endblock %}
+{% block title %}{% trans "AntioMarket - Mercado Campesino" %}{% endblock %}
 
 {% block extra_css %}
 {% load static %}
@@ -9,14 +10,14 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h1 class="text-center page-title mb-3">🌱 Mercado Campesino</h1>
+    <h1 class="text-center page-title mb-3">🌱 {% trans "Mercado Campesino" %}</h1>
 
     <!-- Filtros de búsqueda -->
     <div class="row justify-content-center mb-4">
         <div class="col-md-10">
             <form method="get" class="d-flex justify-content-center gap-3 align-items-center">
                 <select name="categoria" class="form-select" style="max-width: 200px;">
-                    <option value="">Todas las categorías</option>
+                    <option value="">{% trans "Todas las categorías" %}</option>
                     {% for categoria in categorias %}
                         <option value="{{ categoria }}" {% if request.GET.categoria == categoria %}selected{% endif %}>
                             {{ categoria }}
@@ -24,17 +25,17 @@
                     {% endfor %}
                 </select>
                 <div class="flex-grow-1">
-                    <input type="search" name="buscar" class="form-control" placeholder="Buscar productos..." 
+                    <input type="search" name="buscar" class="form-control" placeholder="{% trans 'Buscar productos...' %}" 
                            value="{{ request.GET.buscar|default:'' }}">
                 </div>
                 <div class="d-flex gap-2">
                     <input type="number" name="precio_min" class="form-control" style="max-width: 120px;" 
-                           placeholder="Precio min" value="{{ request.GET.precio_min|default:'' }}">
+                           placeholder="{% trans 'Precio min' %}" value="{{ request.GET.precio_min|default:'' }}">
                     <span>-</span>
                     <input type="number" name="precio_max" class="form-control" style="max-width: 120px;" 
-                           placeholder="Precio max" value="{{ request.GET.precio_max|default:'' }}">
+                           placeholder="{% trans 'Precio max' %}" value="{{ request.GET.precio_max|default:'' }}">
                 </div>
-                <button type="submit" class="btn btn-primary">Filtrar</button>
+                <button type="submit" class="btn btn-primary">{% trans "Filtrar" %}</button>
             </form>
         </div>
     </div>
@@ -62,16 +63,16 @@
                         {% if user.is_authenticated %}
                             {% if user.is_cliente %}
                                 <a href="{% url 'carrito:agregar_producto' producto.id %}" class="btn btn-add-to-cart btn-sm">
-                                    <i class="fas fa-cart-plus me-1"></i>Agregar al carrito
+                                    <i class="fas fa-cart-plus me-1"></i>{% trans "Agregar al carrito" %}
                                 </a>
                             {% else %}
                                 <a href="{% url 'productos:detalle_producto' producto.pk %}" class="btn btn-outline-secondary btn-sm">
-                                    <i class="fas fa-eye me-1"></i>Ver producto
+                                    <i class="fas fa-eye me-1"></i>{% trans "Ver producto" %}
                                 </a>
                             {% endif %}
                         {% else %}
                             <a href="{% url 'cuentas:login' %}" class="btn btn-outline-primary btn-sm">
-                                <i class="fas fa-sign-in-alt me-1"></i>Iniciar sesión
+                                <i class="fas fa-sign-in-alt me-1"></i>{% trans "Iniciar sesión" %}
                             </a>
                         {% endif %}
                     </div>
@@ -81,8 +82,8 @@
             <div class="col-12">
                 <div class="no-products">
                     <i class="fas fa-seedling fa-3x mb-3" style="color: var(--color-secundario);"></i>
-                    <h3>No hay productos disponibles</h3>
-                    <p class="mb-0">Pronto tendremos productos frescos del campo para ti.</p>
+                    <h3>{% trans "No hay productos disponibles" %}</h3>
+                    <p class="mb-0">{% trans "Pronto tendremos productos frescos del campo para ti." %}</p>
                 </div>
             </div>
         {% endfor %}

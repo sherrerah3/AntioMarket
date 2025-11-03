@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.db.models import Q
+from django.utils.translation import gettext_lazy as _
 from .models import Producto
 from .forms import ProductoForm, BuscarProductoForm, ActualizarStockForm, ProductoImagenForm
 from cuentas.models import CuentaVendedor
@@ -119,7 +120,7 @@ class CrearProductoView(LoginRequiredMixin, VendedorRequiredMixin, CreateView):
     
     def form_valid(self, form):
         form.instance.vendedor = self.request.user.cuentavendedor
-        messages.success(self.request, 'Producto creado exitosamente.')
+        messages.success(self.request, _('Producto creado exitosamente.'))
         return super().form_valid(form)
 
 class EditarProductoView(LoginRequiredMixin, VendedorRequiredMixin, UpdateView):
@@ -133,7 +134,7 @@ class EditarProductoView(LoginRequiredMixin, VendedorRequiredMixin, UpdateView):
         return Producto.objects.filter(vendedor=self.request.user.cuentavendedor)
     
     def form_valid(self, form):
-        messages.success(self.request, 'Producto actualizado exitosamente.')
+        messages.success(self.request, _('Producto actualizado exitosamente.'))
         return super().form_valid(form)
 
 class EliminarProductoView(LoginRequiredMixin, VendedorRequiredMixin, DeleteView):
@@ -147,7 +148,7 @@ class EliminarProductoView(LoginRequiredMixin, VendedorRequiredMixin, DeleteView
         return Producto.objects.filter(vendedor=self.request.user.cuentavendedor)
     
     def delete(self, request, *args, **kwargs):
-        messages.success(request, 'Producto eliminado exitosamente.')
+        messages.success(request, _('Producto eliminado exitosamente.'))
         return super().delete(request, *args, **kwargs)
 
 # Views para buscar productos por vendedor
@@ -201,7 +202,7 @@ class ActualizarStockView(LoginRequiredMixin, VendedorRequiredMixin, UpdateView)
         return Producto.objects.filter(vendedor=self.request.user.cuentavendedor)
     
     def form_valid(self, form):
-        messages.success(self.request, 'Stock actualizado exitosamente.')
+        messages.success(self.request, _('Stock actualizado exitosamente.'))
         return super().form_valid(form)
 
 class ActualizarImagenView(LoginRequiredMixin, VendedorRequiredMixin, UpdateView):
@@ -214,7 +215,7 @@ class ActualizarImagenView(LoginRequiredMixin, VendedorRequiredMixin, UpdateView
         return Producto.objects.filter(vendedor=self.request.user.cuentavendedor)
     
     def form_valid(self, form):
-        messages.success(self.request, 'Imagen actualizada exitosamente.')
+        messages.success(self.request, _('Imagen actualizada exitosamente.'))
         return super().form_valid(form)
 
 def home(request):

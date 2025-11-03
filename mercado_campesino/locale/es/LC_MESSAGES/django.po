@@ -1,0 +1,740 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-02 21:45-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? "
+"1 : 2;\n"
+
+#: carrito/templates/carrito/ver_carrito.html:4
+msgid "Mi Carrito - AntioMarket"
+msgstr ""
+
+#: carrito/templates/carrito/ver_carrito.html:14
+msgid "Mi Carrito"
+msgstr ""
+
+#: carrito/templates/carrito/ver_carrito.html:42
+msgid "Eliminar del carrito"
+msgstr ""
+
+#: carrito/templates/carrito/ver_carrito.html:69
+msgid "Total"
+msgstr ""
+
+#: carrito/templates/carrito/ver_carrito.html:73
+msgid "Proceder al pago"
+msgstr ""
+
+#: carrito/templates/carrito/ver_carrito.html:82
+msgid "Tu carrito está vacío"
+msgstr ""
+
+#: carrito/templates/carrito/ver_carrito.html:83
+msgid "¡Explora nuestros productos y encuentra algo que te guste!"
+msgstr ""
+
+#: carrito/templates/carrito/ver_carrito.html:85
+#: cuentas/templates/cuentas/perfil_cliente.html:82
+msgid "Explorar Productos"
+msgstr ""
+
+#: carrito/templates/carrito/ver_carrito.html:92
+msgid "Seguir Comprando"
+msgstr ""
+
+#: cuentas/templates/cuentas/lista_vendedores.html:4
+msgid "Productores - AntioMarket"
+msgstr ""
+
+#: cuentas/templates/cuentas/lista_vendedores.html:13
+msgid "Nuestros Productores"
+msgstr ""
+
+#: cuentas/templates/cuentas/lista_vendedores.html:38
+msgid "Ver productos"
+msgstr ""
+
+#: cuentas/templates/cuentas/lista_vendedores.html:47
+msgid "No hay productores registrados"
+msgstr ""
+
+#: cuentas/templates/cuentas/lista_vendedores.html:48
+msgid "Pronto tendremos productores locales para ti."
+msgstr ""
+
+#: cuentas/templates/cuentas/login.html:4
+msgid "Iniciar Sesión - AntioMarket"
+msgstr ""
+
+#: cuentas/templates/cuentas/login.html:16
+#: cuentas/templates/cuentas/login.html:34
+msgid "Iniciar Sesión"
+msgstr ""
+
+#: cuentas/templates/cuentas/login.html:17
+msgid "Accede a tu cuenta de AntioMarket"
+msgstr ""
+
+#: cuentas/templates/cuentas/login.html:24
+#: cuentas/templates/cuentas/perfil_cliente.html:37
+#: cuentas/templates/cuentas/perfil_vendedor.html:37
+msgid "Usuario"
+msgstr ""
+
+#: cuentas/templates/cuentas/login.html:29
+#: cuentas/templates/cuentas/registro_cliente.html:58
+msgid "Contraseña"
+msgstr ""
+
+#: cuentas/templates/cuentas/login.html:39
+msgid "¿No tienes cuenta?"
+msgstr ""
+
+#: cuentas/templates/cuentas/login.html:41
+#: cuentas/templates/cuentas/registro_cliente.html:76
+msgid "Registrarse como Cliente"
+msgstr ""
+
+#: cuentas/templates/cuentas/login.html:44
+#: cuentas/templates/cuentas/registro_cliente.html:88
+msgid "Registrarse como Vendedor"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_cliente.html:4
+msgid "Perfil Cliente - AntioMarket"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_cliente.html:16
+msgid "Perfil de Cliente"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_cliente.html:17
+msgid "Bienvenido a tu perfil"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_cliente.html:31
+#: cuentas/templates/cuentas/perfil_vendedor.html:31
+#: cuentas/templates/cuentas/registro_vendedor.html:34
+msgid "Información Personal"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_cliente.html:33
+#: cuentas/templates/cuentas/perfil_vendedor.html:33
+#: cuentas/templates/cuentas/registro_cliente.html:33
+#: cuentas/templates/cuentas/registro_vendedor.html:38
+#: productos/templates/productos/eliminar_producto.html:48
+msgid "Nombre"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_cliente.html:45
+#: cuentas/templates/cuentas/perfil_vendedor.html:74
+#: cuentas/templates/cuentas/registro_cliente.html:70
+msgid "Dirección"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_cliente.html:49
+msgid "Miembro desde"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_cliente.html:56
+msgid "Estadísticas"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_cliente.html:60
+msgid "Compras Realizadas"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_cliente.html:64
+msgid "Productos en Carrito"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_cliente.html:68
+msgid "Reseñas Escritas"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_cliente.html:75
+msgid "Historial de Compras"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_cliente.html:77
+msgid "Has realizado"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_cliente.html:77
+msgid "compra"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_cliente.html:77
+msgid "exitosa"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_cliente.html:79
+msgid "Aún no has realizado compras."
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_cliente.html:89
+#: cuentas/templates/cuentas/perfil_vendedor.html:116
+msgid "Editar Perfil"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_cliente.html:92
+msgid "Ver Carrito"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_cliente.html:99
+msgid "Mis Reseñas"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_cliente.html:103
+msgid "Escribir Primera Reseña"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_vendedor.html:4
+msgid "Perfil Vendedor - AntioMarket"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_vendedor.html:16
+msgid "Perfil de Vendedor"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_vendedor.html:48
+msgid "Información de la Tienda"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_vendedor.html:50
+msgid "Nombre de Tienda"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_vendedor.html:54
+#: cuentas/templates/cuentas/perfil_vendedor.html:78
+#: productos/templates/productos/eliminar_producto.html:64
+msgid "Descripción"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_vendedor.html:62
+msgid "Ubicaciones"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_vendedor.html:66
+msgid "Departamento"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_vendedor.html:70
+msgid "Municipio"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_vendedor.html:89
+#: cuentas/templates/cuentas/perfil_vendedor.html:122
+#: mercado_campesino/templates/base.html:84
+#: productos/templates/productos/mis_productos.html:127
+msgid "Mis Productos"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_vendedor.html:105
+#: productos/templates/productos/detalle_producto.html:45
+msgid "Productos"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_vendedor.html:106
+msgid "Aún no has agregado productos."
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_vendedor.html:108
+msgid "Agregar Primer Producto"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_vendedor.html:119
+#: productos/templates/productos/crear_producto.html:142
+#: productos/templates/productos/mis_productos.html:132
+msgid "Agregar Producto"
+msgstr ""
+
+#: cuentas/templates/cuentas/perfil_vendedor.html:125
+msgid "Agregar Ubicación"
+msgstr ""
+
+#: cuentas/templates/cuentas/registro_cliente.html:4
+msgid "Registro Cliente - AntioMarket"
+msgstr ""
+
+#: cuentas/templates/cuentas/registro_cliente.html:15
+msgid "Registro de Cliente"
+msgstr ""
+
+#: cuentas/templates/cuentas/registro_cliente.html:16
+msgid "Únete a AntioMarket como cliente"
+msgstr ""
+
+#: cuentas/templates/cuentas/registro_cliente.html:38
+#: cuentas/templates/cuentas/registro_vendedor.html:43
+msgid "Apellido"
+msgstr ""
+
+#: cuentas/templates/cuentas/registro_cliente.html:45
+#: cuentas/templates/cuentas/registro_vendedor.html:51
+msgid "Nombre de usuario"
+msgstr ""
+
+#: cuentas/templates/cuentas/registro_cliente.html:51
+msgid "Correo electrónico"
+msgstr ""
+
+#: cuentas/templates/cuentas/registro_cliente.html:63
+msgid "Confirmar contraseña"
+msgstr ""
+
+#: cuentas/templates/cuentas/registro_cliente.html:81
+msgid "¿Ya tienes cuenta?"
+msgstr ""
+
+#: cuentas/templates/cuentas/registro_cliente.html:83
+#: productos/templates/productos/home.html:75
+msgid "Iniciar sesión"
+msgstr ""
+
+#: cuentas/templates/cuentas/registro_cliente.html:86
+msgid "¿Quieres vender productos?"
+msgstr ""
+
+#: cuentas/templates/cuentas/registro_vendedor.html:4
+msgid "Registro Vendedor - AntioMarket"
+msgstr ""
+
+#: cuentas/templates/cuentas/registro_vendedor.html:16
+msgid "Registro de Vendedor"
+msgstr ""
+
+#: cuentas/templates/cuentas/registro_vendedor.html:17
+msgid "Únete a AntioMarket como vendedor y vende tus productos"
+msgstr ""
+
+#: mercado_campesino/settings.py:127
+msgid "Español"
+msgstr ""
+
+#: mercado_campesino/settings.py:128
+msgid "English"
+msgstr ""
+
+#: mercado_campesino/templates/base.html:8
+#: productos/templates/productos/home.html:4
+msgid "AntioMarket - Mercado Campesino"
+msgstr ""
+
+#: mercado_campesino/templates/base.html:49
+#: productos/templates/productos/detalle_producto.html:44
+msgid "Inicio"
+msgstr ""
+
+#: mercado_campesino/templates/base.html:52
+msgid "Productores"
+msgstr ""
+
+#: mercado_campesino/templates/base.html:55
+msgid "Reseñas"
+msgstr ""
+
+#: mercado_campesino/templates/base.html:58
+msgid "Nosotros"
+msgstr ""
+
+#: mercado_campesino/templates/base.html:81
+#: mercado_campesino/templates/base.html:90
+msgid "Mi Perfil"
+msgstr ""
+
+#: mercado_campesino/templates/base.html:93
+msgid "Mis Pedidos"
+msgstr ""
+
+#: mercado_campesino/templates/base.html:102
+msgid "Cerrar Sesión"
+msgstr ""
+
+#: mercado_campesino/templates/base.html:111
+msgid "Ingresar"
+msgstr ""
+
+#: mercado_campesino/templates/base.html:115
+msgid "Registrarse"
+msgstr ""
+
+#: mercado_campesino/templates/base.html:119
+msgid "Como Cliente"
+msgstr ""
+
+#: mercado_campesino/templates/base.html:122
+msgid "Como Vendedor"
+msgstr ""
+
+#: mercado_campesino/templates/base.html:159
+msgid "Conectando productores campesinos con consumidores conscientes."
+msgstr ""
+
+#: mercado_campesino/templates/base.html:165
+msgid "Contacto"
+msgstr ""
+
+#: mercado_campesino/templates/base.html:169
+msgid "Medellín, Antioquia"
+msgstr ""
+
+#: mercado_campesino/templates/base.html:188
+msgid "Todos los derechos reservados."
+msgstr ""
+
+#: productos/templates/productos/crear_producto.html:4
+msgid "Agregar Producto - AntioMarket"
+msgstr ""
+
+#: productos/templates/productos/crear_producto.html:31
+msgid "Agregar Nuevo Producto"
+msgstr ""
+
+#: productos/templates/productos/crear_producto.html:32
+msgid "Comparte tus productos con la comunidad de AntioMarket"
+msgstr ""
+
+#: productos/templates/productos/crear_producto.html:49
+#: productos/templates/productos/editar_producto.html:34
+msgid "Información Básica"
+msgstr ""
+
+#: productos/templates/productos/crear_producto.html:81
+msgid ""
+"Describe tu producto de manera detallada: origen, características, "
+"beneficios, etc."
+msgstr ""
+
+#: productos/templates/productos/crear_producto.html:88
+#: productos/templates/productos/editar_producto.html:70
+msgid "Precio y Disponibilidad"
+msgstr ""
+
+#: productos/templates/productos/crear_producto.html:107
+#: productos/templates/productos/editar_producto.html:89
+#: productos/templates/productos/eliminar_producto.html:61
+msgid "unidades"
+msgstr ""
+
+#: productos/templates/productos/crear_producto.html:120
+#: productos/templates/productos/editar_producto.html:102
+msgid "Imagen del Producto"
+msgstr ""
+
+#: productos/templates/productos/crear_producto.html:131
+msgid ""
+"Sube una imagen atractiva de tu producto. Formatos permitidos: JPG, PNG, GIF "
+"(máx. 5MB)"
+msgstr ""
+
+#: productos/templates/productos/crear_producto.html:139
+#: productos/templates/productos/editar_producto.html:134
+#: productos/templates/productos/eliminar_producto.html:86
+#: reseñas/templates/reseñas/crear_reseña.html:69
+msgid "Cancelar"
+msgstr ""
+
+#: productos/templates/productos/crear_producto.html:149
+msgid "Consejos para mejores ventas"
+msgstr ""
+
+#: productos/templates/productos/crear_producto.html:151
+msgid "Usa nombres descriptivos y atractivos"
+msgstr ""
+
+#: productos/templates/productos/crear_producto.html:152
+msgid "Incluye fotos de alta calidad"
+msgstr ""
+
+#: productos/templates/productos/crear_producto.html:153
+msgid "Describe el origen y beneficios de tu producto"
+msgstr ""
+
+#: productos/templates/productos/crear_producto.html:154
+msgid "Mantén precios competitivos"
+msgstr ""
+
+#: productos/templates/productos/crear_producto.html:155
+msgid "Actualiza el stock regularmente"
+msgstr ""
+
+#: productos/templates/productos/detalle_producto.html:80
+msgid "unidades disponibles"
+msgstr ""
+
+#: productos/templates/productos/detalle_producto.html:84
+msgid "Tienes"
+msgstr ""
+
+#: productos/templates/productos/detalle_producto.html:84
+msgid "en tu carrito"
+msgstr ""
+
+#: productos/templates/productos/detalle_producto.html:89
+msgid "Producto agotado"
+msgstr ""
+
+#: productos/templates/productos/detalle_producto.html:101
+msgid "Agregar al Carrito"
+msgstr ""
+
+#: productos/templates/productos/detalle_producto.html:106
+msgid "Solo los clientes pueden agregar productos al carrito."
+msgstr ""
+
+#: productos/templates/productos/detalle_producto.html:111
+msgid "Iniciar Sesión para Comprar"
+msgstr ""
+
+#: productos/templates/productos/detalle_producto.html:118
+msgid "Producto Agotado"
+msgstr ""
+
+#: productos/templates/productos/detalle_producto.html:125
+msgid "Volver a Productos"
+msgstr ""
+
+#: productos/templates/productos/detalle_producto.html:134
+msgid "Información del Vendedor"
+msgstr ""
+
+#: productos/templates/productos/detalle_producto.html:137
+msgid "Tienda"
+msgstr ""
+
+#: productos/templates/productos/detalle_producto.html:138
+msgid "Vendedor"
+msgstr ""
+
+#: productos/templates/productos/detalle_producto.html:149
+msgid "Más productos de"
+msgstr ""
+
+#: productos/templates/productos/editar_producto.html:4
+msgid "Editar Producto - AntioMarket"
+msgstr ""
+
+#: productos/templates/productos/editar_producto.html:16
+msgid "Editar Producto"
+msgstr ""
+
+#: productos/templates/productos/editar_producto.html:17
+msgid "Actualiza la información de tu producto"
+msgstr ""
+
+#: productos/templates/productos/editar_producto.html:106
+msgid "Imagen actual"
+msgstr ""
+
+#: productos/templates/productos/editar_producto.html:123
+msgid "Selecciona una nueva imagen solo si quieres cambiar la actual."
+msgstr ""
+
+#: productos/templates/productos/editar_producto.html:125
+msgid "Sube una imagen atractiva de tu producto."
+msgstr ""
+
+#: productos/templates/productos/editar_producto.html:137
+msgid "Guardar Cambios"
+msgstr ""
+
+#: productos/templates/productos/eliminar_producto.html:4
+msgid "Eliminar Producto - AntioMarket"
+msgstr ""
+
+#: productos/templates/productos/eliminar_producto.html:16
+msgid "Eliminar Producto"
+msgstr ""
+
+#: productos/templates/productos/eliminar_producto.html:17
+#: productos/templates/productos/eliminar_producto.html:78
+msgid "Esta acción no se puede deshacer"
+msgstr ""
+
+#: productos/templates/productos/eliminar_producto.html:44
+msgid "Información del Producto"
+msgstr ""
+
+#: productos/templates/productos/eliminar_producto.html:52
+msgid "Categoría"
+msgstr ""
+
+#: productos/templates/productos/eliminar_producto.html:56
+msgid "Precio"
+msgstr ""
+
+#: productos/templates/productos/eliminar_producto.html:73
+msgid "¿Estás seguro?"
+msgstr ""
+
+#: productos/templates/productos/eliminar_producto.html:74
+msgid "Al eliminar este producto"
+msgstr ""
+
+#: productos/templates/productos/eliminar_producto.html:76
+msgid "Se perderá toda la información del producto"
+msgstr ""
+
+#: productos/templates/productos/eliminar_producto.html:77
+msgid "Los clientes ya no podrán verlo ni comprarlo"
+msgstr ""
+
+#: productos/templates/productos/eliminar_producto.html:89
+msgid "Sí, Eliminar Producto"
+msgstr ""
+
+#: productos/templates/productos/home.html:13
+msgid "Mercado Campesino"
+msgstr ""
+
+#: productos/templates/productos/home.html:20
+msgid "Todas las categorías"
+msgstr ""
+
+#: productos/templates/productos/home.html:28
+msgid "Buscar productos..."
+msgstr ""
+
+#: productos/templates/productos/home.html:33
+msgid "Precio min"
+msgstr ""
+
+#: productos/templates/productos/home.html:36
+msgid "Precio max"
+msgstr ""
+
+#: productos/templates/productos/home.html:38
+msgid "Filtrar"
+msgstr ""
+
+#: productos/templates/productos/home.html:66
+msgid "Agregar al carrito"
+msgstr ""
+
+#: productos/templates/productos/home.html:70
+msgid "Ver producto"
+msgstr ""
+
+#: productos/templates/productos/home.html:85
+msgid "No hay productos disponibles"
+msgstr ""
+
+#: productos/templates/productos/home.html:86
+msgid "Pronto tendremos productos frescos del campo para ti."
+msgstr ""
+
+#: productos/templates/productos/mis_productos.html:4
+msgid "Mis Productos - AntioMarket"
+msgstr ""
+
+#: productos/templates/productos/mis_productos.html:128
+msgid "Gestiona todos tus productos desde aquí"
+msgstr ""
+
+#: productos/templates/productos/mis_productos.html:152
+msgid "Total de productos"
+msgstr ""
+
+#: productos/templates/productos/mis_productos.html:155
+msgid "Mostrando página"
+msgstr ""
+
+#: productos/templates/productos/mis_productos.html:155
+msgid "de"
+msgstr ""
+
+#: productos/templates/productos/mis_productos.html:186
+#: productos/templates/productos/mis_productos.html:188
+msgid "disponibles"
+msgstr ""
+
+#: productos/templates/productos/mis_productos.html:190
+msgid "Agotado"
+msgstr ""
+
+#: productos/templates/productos/mis_productos.html:195
+msgid "Editar"
+msgstr ""
+
+#: productos/templates/productos/mis_productos.html:198
+msgid "Eliminar"
+msgstr ""
+
+#: productos/views.py:123
+msgid "Producto creado exitosamente."
+msgstr ""
+
+#: productos/views.py:137
+msgid "Producto actualizado exitosamente."
+msgstr ""
+
+#: productos/views.py:151
+msgid "Producto eliminado exitosamente."
+msgstr ""
+
+#: productos/views.py:205
+msgid "Stock actualizado exitosamente."
+msgstr ""
+
+#: productos/views.py:218
+msgid "Imagen actualizada exitosamente."
+msgstr ""
+
+#: reseñas/templates/reseñas/crear_reseña.html:4
+msgid "Escribir Reseña - AntioMarket"
+msgstr ""
+
+#: reseñas/templates/reseñas/crear_reseña.html:16
+msgid "Escribir Reseña"
+msgstr ""
+
+#: reseñas/templates/reseñas/crear_reseña.html:18
+msgid "Comparte tu calificación sobre"
+msgstr ""
+
+#: reseñas/templates/reseñas/crear_reseña.html:20
+msgid "Califica productos que hayas comprado"
+msgstr ""
+
+#: reseñas/templates/reseñas/crear_reseña.html:27
+msgid "No tienes productos para reseñar."
+msgstr ""
+
+#: reseñas/templates/reseñas/crear_reseña.html:28
+msgid ""
+"Solo puedes reseñar productos que hayas comprado y que no hayas reseñado "
+"previamente."
+msgstr ""
+
+#: reseñas/templates/reseñas/crear_reseña.html:31
+msgid "Ver Productos"
+msgstr ""
+
+#: reseñas/templates/reseñas/crear_reseña.html:46
+msgid "Solo aparecen productos que has comprado y no has reseñado."
+msgstr ""
+
+#: reseñas/templates/reseñas/crear_reseña.html:64
+msgid ""
+"El comentario es opcional. La calificación con estrellas es lo más "
+"importante."
+msgstr ""
+
+#: reseñas/templates/reseñas/crear_reseña.html:72
+msgid "Publicar Reseña"
+msgstr ""

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Productores - AntioMarket{% endblock %}
+{% block title %}{% trans "Productores - AntioMarket" %}{% endblock %}
 
 {% block extra_css %}
 {% load static %}
@@ -9,7 +10,7 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h1 class="text-center page-title mb-3">🏡 Nuestros Productores</h1>
+    <h1 class="text-center page-title mb-3">🏡 {% trans "Nuestros Productores" %}</h1>
     
     <div class="row mt-5">
         {% for vendedor in vendedores %}
@@ -34,7 +35,7 @@
                 </div>
                 <div class="card-footer d-flex justify-content-end align-items-center bg-transparent border-0">
                     <a href="{% url 'cuentas:detalle_vendedor' vendedor.pk %}" class="btn btn-primary btn-sm">
-                        <i class="fas fa-store me-1"></i>Ver productos
+                        <i class="fas fa-store me-1"></i>{% trans "Ver productos" %}
                     </a>
                 </div>
             </div>
@@ -43,8 +44,8 @@
         <div class="col-12">
             <div class="no-products text-center">
                 <i class="fas fa-store fa-3x mb-3" style="color: var(--color-secundario);"></i>
-                <h3>No hay productores registrados</h3>
-                <p class="mb-0">Pronto tendremos productores locales para ti.</p>
+                <h3>{% trans "No hay productores registrados" %}</h3>
+                <p class="mb-0">{% trans "Pronto tendremos productores locales para ti." %}</p>
             </div>
         </div>
         {% endfor %}

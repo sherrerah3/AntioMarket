@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.db import transaction
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from .models import (
     Usuario, 
     CuentaCliente, 

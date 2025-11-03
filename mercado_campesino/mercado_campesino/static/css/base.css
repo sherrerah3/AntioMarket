@@ -15,6 +15,34 @@ body {
     color: var(--color-primario);
 }
 
+/* Selector de idioma */
+.language-selector {
+    margin: 0 15px;
+}
+
+.language-selector select {
+    width: 120px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid var(--color-fondo);
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--color-primario);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.language-selector select:hover {
+    background-color: var(--color-fondo);
+    border-color: var(--color-secundario);
+}
+
+.language-selector select:focus {
+    outline: none;
+    border-color: var(--color-secundario);
+    box-shadow: 0 0 5px rgba(195, 134, 64, 0.5);
+}
+
 /* Navbar */
 .navbar {
     background-color: var(--color-verde-oscuro) !important;

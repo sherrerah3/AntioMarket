@@ -1,16 +1,17 @@
+{% load i18n %}
+{% load static %}
 <!DOCTYPE html>
-<html lang="es">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}AntioMarket - Mercado Campesino{% endblock %}</title>
+    <title>{% block title %}{% trans "AntioMarket - Mercado Campesino" %}{% endblock %}</title>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- CSS personalizado -->
-    {% load static %}
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     
     {% block extra_css %}{% endblock %}
@@ -25,19 +26,36 @@
                 AntioMarket
             </a>
             
+            <!-- Selector de idioma -->
+            <div class="language-selector">
+                <form action="{% url 'set_language' %}" method="post">
+                    {% csrf_token %}
+                    <input name="next" type="hidden" value="{{ request.path }}">
+                    <select name="language" onchange="this.form.submit()" class="form-select form-select-sm">
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% for lang_code, lang_name in LANGUAGES %}
+                            <option value="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}selected{% endif %}>
+                                {{ lang_name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </form>
+            </div>
+            
             <!-- Menú de navegación -->
             <div class="navbar-nav me-auto">
                 <a class="nav-link" href="{% url 'productos:home' %}">
-                    <i class="fas fa-home me-1"></i>Inicio
+                    <i class="fas fa-home me-1"></i>{% trans "Inicio" %}
                 </a>
                 <a class="nav-link" href="{% url 'cuentas:lista_vendedores' %}">
-                    <i class="fas fa-users me-1"></i>Productores
+                    <i class="fas fa-users me-1"></i>{% trans "Productores" %}
                 </a>
                 <a class="nav-link" href="{% url 'reseñas:lista_reseñas' %}">
-                    <i class="fas fa-star me-1"></i>Reseñas
+                    <i class="fas fa-star me-1"></i>{% trans "Reseñas" %}
                 </a>
                 <a class="nav-link" href="{% url 'productos:nosotros' %}">
-                    <i class="fas fa-info-circle me-1"></i>Nosotros
+                    <i class="fas fa-info-circle me-1"></i>{% trans "Nosotros" %}
                 </a>
             </div>
             
@@ -60,19 +78,19 @@
                         <ul class="dropdown-menu">
                             {% if user.is_vendedor %}
                                 <li><a class="dropdown-item" href="{% url 'cuentas:perfil_vendedor' %}">
-                                    <i class="fas fa-user-circle me-2"></i>Mi Perfil
+                                    <i class="fas fa-user-circle me-2"></i>{% trans "Mi Perfil" %}
                                 </a></li>
                                 <li><a class="dropdown-item" href="{% url 'productos:mis_productos' %}">
-                                    <i class="fas fa-box me-2"></i>Mis Productos
+                                    <i class="fas fa-box me-2"></i>{% trans "Mis Productos" %}
                                 </a></li>
                             {% endif %}
                             
                             {% if user.is_cliente %}
                                 <li><a class="dropdown-item" href="{% url 'cuentas:perfil_cliente' %}">
-                                    <i class="fas fa-user-circle me-2"></i>Mi Perfil
+                                    <i class="fas fa-user-circle me-2"></i>{% trans "Mi Perfil" %}
                                 </a></li>
                                 <li><a class="dropdown-item" href="{% url 'pedidos:mis_pedidos' %}">
-                                    <i class="fas fa-shopping-bag me-2"></i>Mis Pedidos
+                                    <i class="fas fa-shopping-bag me-2"></i>{% trans "Mis Pedidos" %}
                                 </a></li>
                             {% endif %}
                             
@@ -81,7 +99,7 @@
                                 <form method="post" action="{% url 'cuentas:logout' %}" style="display: inline;">
                                     {% csrf_token %}
                                     <button type="submit" class="dropdown-item border-0 bg-transparent text-start w-100" style="cursor: pointer;">
-                                        <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+                                        <i class="fas fa-sign-out-alt me-2"></i>{% trans "Cerrar Sesión" %}
                                     </button>
                                 </form>
                             </li>
@@ -90,18 +108,18 @@
                 {% else %}
                     <!-- Usuario no autenticado -->
                     <a class="nav-link" href="{% url 'cuentas:login' %}">
-                        <i class="fas fa-sign-in-alt me-1"></i>Ingresar
+                        <i class="fas fa-sign-in-alt me-1"></i>{% trans "Ingresar" %}
                     </a>
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            <i class="fas fa-user-plus me-1"></i>Registrarse
+                            <i class="fas fa-user-plus me-1"></i>{% trans "Registrarse" %}
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{% url 'cuentas:registro_cliente' %}">
-                                <i class="fas fa-user me-2"></i>Como Cliente
+                                <i class="fas fa-user me-2"></i>{% trans "Como Cliente" %}
                             </a></li>
                             <li><a class="dropdown-item" href="{% url 'cuentas:registro_vendedor' %}">
-                                <i class="fas fa-store me-2"></i>Como Vendedor
+                                <i class="fas fa-store me-2"></i>{% trans "Como Vendedor" %}
                             </a></li>
                         </ul>
                     </div>
@@ -138,17 +156,17 @@
                         <i class="fas fa-seedling me-2"></i>AntioMarket
                     </h5>
                     <p class="text-muted">
-                        Conectando productores campesinos con consumidores conscientes. 
+                        {% trans "Conectando productores campesinos con consumidores conscientes." %}
                     </p>
                 </div>
                 
                 <!-- Contacto -->
                 <div class="col-lg-6 col-md-6 mb-4">
-                    <h6 class="mb-3">Contacto</h6>
+                    <h6 class="mb-3">{% trans "Contacto" %}</h6>
                     <ul class="list-unstyled">
                         <li class="mb-2">
                             <i class="fas fa-map-marker-alt me-2"></i>
-                            Medellín, Antioquia
+                            {% trans "Medellín, Antioquia" %}
                         </li>
                         <li class="mb-2">
                             <i class="fas fa-phone me-2"></i>
@@ -167,7 +185,7 @@
             <!-- Copyright -->
             <div class="row align-items-center">
                 <div class="col-12 text-center">
-                    <small>&copy; {% now "Y" %} AntioMarket. Todos los derechos reservados.</small>
+                    <small>&copy; {% now "Y" %} AntioMarket. {% trans "Todos los derechos reservados." %}</small>
                 </div>
             </div>
         </div>

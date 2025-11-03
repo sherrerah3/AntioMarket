@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Reseñas - AntioMarket{% endblock %}
+{% block title %}{% trans "Reseñas" %} - AntioMarket{% endblock %}
 
 {% block extra_css %}
 {% load static %}
@@ -11,8 +12,8 @@
 {% block content %}
 <div class="container">
     <div class="reseñas-header">
-        <h1><i class="fas fa-star me-2"></i>Reseñas de Productos</h1>
-        <p class="lead">Descubre qué opinan nuestros clientes sobre los productos</p>
+        <h1><i class="fas fa-star me-2"></i>{% trans "Reseñas de Productos" %}</h1>
+        <p class="lead">{% trans "Descubre qué opinan nuestros clientes sobre los productos" %}</p>
     </div>
 
     <!-- Filtros de búsqueda -->
@@ -20,17 +21,17 @@
         <form method="GET" class="row g-3">
             <div class="col-md-8">
                 <input type="text" name="busqueda" class="form-control" 
-                       placeholder="Buscar por producto, comentario o cliente..." 
+                       placeholder="{% trans 'Buscar por producto, comentario o cliente...' %}" 
                        value="{{ request.GET.busqueda }}">
             </div>
             <div class="col-md-3">
                 <select name="calificacion" class="form-select">
-                    <option value="">Todas las calificaciones</option>
-                    <option value="5" {% if request.GET.calificacion == '5' %}selected{% endif %}>⭐⭐⭐⭐⭐ 5 estrellas</option>
-                    <option value="4" {% if request.GET.calificacion == '4' %}selected{% endif %}>⭐⭐⭐⭐ 4 estrellas</option>
-                    <option value="3" {% if request.GET.calificacion == '3' %}selected{% endif %}>⭐⭐⭐ 3 estrellas</option>
-                    <option value="2" {% if request.GET.calificacion == '2' %}selected{% endif %}>⭐⭐ 2 estrellas</option>
-                    <option value="1" {% if request.GET.calificacion == '1' %}selected{% endif %}>⭐ 1 estrella</option>
+                    <option value="">{% trans "Todas las calificaciones" %}</option>
+                    <option value="5" {% if request.GET.calificacion == '5' %}selected{% endif %}>⭐⭐⭐⭐⭐ {% trans "5 estrellas" %}</option>
+                    <option value="4" {% if request.GET.calificacion == '4' %}selected{% endif %}>⭐⭐⭐⭐ {% trans "4 estrellas" %}</option>
+                    <option value="3" {% if request.GET.calificacion == '3' %}selected{% endif %}>⭐⭐⭐ {% trans "3 estrellas" %}</option>
+                    <option value="2" {% if request.GET.calificacion == '2' %}selected{% endif %}>⭐⭐ {% trans "2 estrellas" %}</option>
+                    <option value="1" {% if request.GET.calificacion == '1' %}selected{% endif %}>⭐ {% trans "1 estrella" %}</option>
                 </select>
             </div>
             <div class="col-md-1">
@@ -45,7 +46,7 @@
     {% if user.is_authenticated and user.is_cliente %}
     <div class="text-center mb-4">
         <a href="{% url 'reseñas:crear_reseña' %}" class="btn btn-success">
-            <i class="fas fa-plus me-2"></i>Escribir Reseña
+            <i class="fas fa-plus me-2"></i>{% trans "Escribir Reseña" %}
         </a>
     </div>
     {% endif %}
@@ -83,18 +84,18 @@
                     <span>{{ reseña.cliente.usuario.first_name }} {{ reseña.cliente.usuario.last_name }}</span>
                 </div>
                 <a href="{% url 'reseñas:detalle_reseña' reseña.pk %}" class="btn btn-sm btn-outline-primary">
-                    Ver más
+                    {% trans "Ver más" %}
                 </a>
             </div>
         </div>
         {% empty %}
         <div class="no-reseñas">
             <i class="fas fa-comments fa-3x mb-3"></i>
-            <h3>No hay reseñas disponibles</h3>
-            <p>¡Sé el primero en escribir una reseña!</p>
+            <h3>{% trans "No hay reseñas disponibles" %}</h3>
+            <p>{% trans "¡Sé el primero en escribir una reseña!" %}</p>
             {% if user.is_authenticated and user.is_cliente %}
                 <a href="{% url 'reseñas:crear_reseña' %}" class="btn btn-success">
-                    <i class="fas fa-plus me-2"></i>Escribir Primera Reseña
+                    <i class="fas fa-plus me-2"></i>{% trans "Escribir Primera Reseña" %}
                 </a>
             {% endif %}
         </div>
