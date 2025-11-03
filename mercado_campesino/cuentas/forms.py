@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.utils.translation import gettext_lazy as _
 from .models import Usuario, CuentaCliente, CuentaVendedor, UbicacionVendedor
 from .antioquia_data import MUNICIPIOS_ANTIOQUIA
 
@@ -9,44 +10,40 @@ class RegistroClienteForm(forms.ModelForm):
         max_length=150,
         widget=forms.TextInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Nombre de usuario'
-        })
+        }),
+        label=_('Nombre de usuario')
     )
     first_name = forms.CharField(
         max_length=30,
-        label="Nombre",
+        label=_("Nombre"),
         widget=forms.TextInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Tu nombre'
         })
     )
     last_name = forms.CharField(
         max_length=30,
-        label="Apellido",
+        label=_("Apellido"),
         widget=forms.TextInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Tu apellido'
         })
     )
     email = forms.EmailField(
         widget=forms.EmailInput(attrs={
             'class': 'form-control',
-            'placeholder': 'tu@email.com'
-        })
+        }),
+        label=_('Correo electrónico')
     )
     password1 = forms.CharField(
         widget=forms.PasswordInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Contraseña'
         }),
-        label="Contraseña"
+        label=_("Contraseña")
     )
     password2 = forms.CharField(
         widget=forms.PasswordInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Confirmar contraseña'
         }),
-        label="Confirmar Contraseña"
+        label=_("Confirmar Contraseña")
     )
     
     class Meta:
@@ -55,27 +52,39 @@ class RegistroClienteForm(forms.ModelForm):
         widgets = {
             'direccion': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Tu dirección completa'
             })
         }
+        labels = {
+            'direccion': _('Dirección')
+        }
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['placeholder'] = _('Nombre de usuario')
+        self.fields['first_name'].widget.attrs['placeholder'] = _('Tu nombre')
+        self.fields['last_name'].widget.attrs['placeholder'] = _('Tu apellido')
+        self.fields['email'].widget.attrs['placeholder'] = _('tu@email.com')
+        self.fields['password1'].widget.attrs['placeholder'] = _('Contraseña')
+        self.fields['password2'].widget.attrs['placeholder'] = _('Confirmar contraseña')
+        self.fields['direccion'].widget.attrs['placeholder'] = _('Tu dirección completa')
     
     def clean_username(self):
         username = self.cleaned_data.get('username')
         if Usuario.objects.filter(username=username).exists():
-            raise forms.ValidationError("Este nombre de usuario ya está en uso.")
+            raise forms.ValidationError(_("Este nombre de usuario ya está en uso."))
         return username
     
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if Usuario.objects.filter(email=email).exists():
-            raise forms.ValidationError("Este email ya está registrado.")
+            raise forms.ValidationError(_("Este email ya está registrado."))
         return email
     
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")
         if password1 and password2 and password1 != password2:
-            raise forms.ValidationError("Las contraseñas no coinciden")
+            raise forms.ValidationError(_("Las contraseñas no coinciden"))
         return password2
 
 class RegistroVendedorForm(forms.ModelForm):
@@ -84,44 +93,40 @@ class RegistroVendedorForm(forms.ModelForm):
         max_length=150,
         widget=forms.TextInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Nombre de usuario'
-        })
+        }),
+        label=_('Nombre de usuario')
     )
     first_name = forms.CharField(
         max_length=30,
-        label="Nombre",
+        label=_("Nombre"),
         widget=forms.TextInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Tu nombre'
         })
     )
     last_name = forms.CharField(
         max_length=30,
-        label="Apellido",
+        label=_("Apellido"),
         widget=forms.TextInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Tu apellido'
         })
     )
     email = forms.EmailField(
         widget=forms.EmailInput(attrs={
             'class': 'form-control',
-            'placeholder': 'tu@email.com'
-        })
+        }),
+        label=_('Correo electrónico')
     )
     password1 = forms.CharField(
         widget=forms.PasswordInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Contraseña'
         }),
-        label="Contraseña"
+        label=_("Contraseña")
     )
     password2 = forms.CharField(
         widget=forms.PasswordInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Confirmar contraseña'
         }),
-        label="Confirmar Contraseña"
+        label=_("Confirmar Contraseña")
     )
     
     # Campos de ubicación
@@ -130,30 +135,30 @@ class RegistroVendedorForm(forms.ModelForm):
             'class': 'form-control',
             'readonly': True,
             'value': 'Antioquia'
-        })
+        }),
+        label=_('Departamento')
     )
     municipio = forms.ChoiceField(
-        choices=[('', 'Seleccione un municipio')] + MUNICIPIOS_ANTIOQUIA,
+        choices=[('', _('Seleccione un municipio'))] + MUNICIPIOS_ANTIOQUIA,
         widget=forms.Select(attrs={
             'class': 'form-control',
             'id': 'id_municipio'
-        })
+        }),
+        label=_('Municipio')
     )
     direccion_tienda = forms.CharField(
         max_length=200,
-        label="Dirección de la tienda",
+        label=_("Dirección de la tienda"),
         widget=forms.TextInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Dirección donde vendes tus productos'
         })
     )
     descripcion_zona = forms.CharField(
         widget=forms.Textarea(attrs={
             'class': 'form-control',
             'rows': 3,
-            'placeholder': 'Describe la zona donde está ubicada tu finca o tienda'
         }),
-        label="Descripción de la zona"
+        label=_("Descripción de la zona")
     )
     
     class Meta:
@@ -166,36 +171,51 @@ class RegistroVendedorForm(forms.ModelForm):
         widgets = {
             'nombre_tienda': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Ej: Finca San José, Verduras del Campo, etc.'
             }),
             'descripcion_tienda': forms.Textarea(attrs={
                 'class': 'form-control',
                 'rows': 4,
-                'placeholder': 'Describe tu tienda, productos que vendes, experiencia, etc.'
             }),
             'direccion_tienda': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Dirección donde vendes tus productos'
             })
         }
+        labels = {
+            'nombre_tienda': _('Nombre de la tienda'),
+            'descripcion_tienda': _('Descripción de la tienda'),
+            'direccion_tienda': _('Dirección de la tienda')
+        }
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['placeholder'] = _('Nombre de usuario')
+        self.fields['first_name'].widget.attrs['placeholder'] = _('Tu nombre')
+        self.fields['last_name'].widget.attrs['placeholder'] = _('Tu apellido')
+        self.fields['email'].widget.attrs['placeholder'] = _('tu@email.com')
+        self.fields['password1'].widget.attrs['placeholder'] = _('Contraseña')
+        self.fields['password2'].widget.attrs['placeholder'] = _('Confirmar contraseña')
+        self.fields['direccion_tienda'].widget.attrs['placeholder'] = _('Dirección donde vendes tus productos')
+        self.fields['descripcion_zona'].widget.attrs['placeholder'] = _('Describe la zona donde está ubicada tu finca o tienda')
+        self.fields['nombre_tienda'].widget.attrs['placeholder'] = _('Ej: Finca San José, Verduras del Campo, etc.')
+        self.fields['descripcion_tienda'].widget.attrs['placeholder'] = _('Describe tu tienda, productos que vendes, experiencia, etc.')
     
     def clean_username(self):
         username = self.cleaned_data.get('username')
         if Usuario.objects.filter(username=username).exists():
-            raise forms.ValidationError("Este nombre de usuario ya está en uso.")
+            raise forms.ValidationError(_("Este nombre de usuario ya está en uso."))
         return username
     
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if Usuario.objects.filter(email=email).exists():
-            raise forms.ValidationError("Este email ya está registrado.")
+            raise forms.ValidationError(_("Este email ya está registrado."))
         return email
     
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")
         if password1 and password2 and password1 != password2:
-            raise forms.ValidationError("Las contraseñas no coinciden")
+            raise forms.ValidationError(_("Las contraseñas no coinciden"))
         return password2
 
 class EditarPerfilClienteForm(forms.ModelForm):
@@ -206,9 +226,15 @@ class EditarPerfilClienteForm(forms.ModelForm):
         widgets = {
             'direccion': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Tu dirección completa'
             })
         }
+        labels = {
+            'direccion': _('Dirección')
+        }
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['direccion'].widget.attrs['placeholder'] = _('Tu dirección completa')
 
 class EditarPerfilVendedorForm(forms.ModelForm):
     """Formulario para editar perfil de vendedor"""
@@ -218,14 +244,21 @@ class EditarPerfilVendedorForm(forms.ModelForm):
         widgets = {
             'nombre_tienda': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Ej: Finca San José, Verduras del Campo, etc.'
             }),
             'descripcion_tienda': forms.Textarea(attrs={
                 'class': 'form-control',
                 'rows': 4,
-                'placeholder': 'Describe tu tienda, productos que vendes, experiencia, etc.'
             })
         }
+        labels = {
+            'nombre_tienda': _('Nombre de la tienda'),
+            'descripcion_tienda': _('Descripción de la tienda')
+        }
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['nombre_tienda'].widget.attrs['placeholder'] = _('Ej: Finca San José, Verduras del Campo, etc.')
+        self.fields['descripcion_tienda'].widget.attrs['placeholder'] = _('Describe tu tienda, productos que vendes, experiencia, etc.')
 
 class EditarUsuarioForm(forms.ModelForm):
     """Formulario para editar datos básicos del usuario"""
@@ -235,28 +268,36 @@ class EditarUsuarioForm(forms.ModelForm):
         widgets = {
             'first_name': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Tu nombre'
             }),
             'last_name': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Tu apellido'
             }),
             'email': forms.EmailInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'tu@email.com'
             })
         }
+        labels = {
+            'first_name': _('Nombre'),
+            'last_name': _('Apellido'),
+            'email': _('Correo electrónico')
+        }
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['first_name'].widget.attrs['placeholder'] = _('Tu nombre')
+        self.fields['last_name'].widget.attrs['placeholder'] = _('Tu apellido')
+        self.fields['email'].widget.attrs['placeholder'] = _('tu@email.com')
     
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if Usuario.objects.filter(email=email).exclude(pk=self.instance.pk).exists():
-            raise forms.ValidationError("Este email ya está registrado por otro usuario.")
+            raise forms.ValidationError(_("Este email ya está registrado por otro usuario."))
         return email
 
 class AgregarUbicacionForm(forms.ModelForm):
     municipio = forms.ChoiceField(
         choices=[
-            ('', 'Seleccione un municipio'),
+            ('', _('Seleccione un municipio')),
             ('Medellín', 'Medellín'),
             ('Bello', 'Bello'),
             ('Envigado', 'Envigado'),
@@ -268,7 +309,8 @@ class AgregarUbicacionForm(forms.ModelForm):
             ('Girardota', 'Girardota'),
             ('Barbosa', 'Barbosa'),
         ],
-        widget=forms.Select(attrs={'class': 'form-control'})
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        label=_('Municipio')
     )
 
     class Meta:
@@ -277,11 +319,18 @@ class AgregarUbicacionForm(forms.ModelForm):
         widgets = {
             'direccion': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Ingresa la dirección específica'
             }),
             'descripcion_zona': forms.Textarea(attrs={
                 'class': 'form-control',
                 'rows': 3,
-                'placeholder': 'Describe la zona (referencias, puntos cercanos, etc.)'
             })
         }
+        labels = {
+            'direccion': _('Dirección'),
+            'descripcion_zona': _('Descripción de la zona')
+        }
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['direccion'].widget.attrs['placeholder'] = _('Ingresa la dirección específica')
+        self.fields['descripcion_zona'].widget.attrs['placeholder'] = _('Describe la zona (referencias, puntos cercanos, etc.)')

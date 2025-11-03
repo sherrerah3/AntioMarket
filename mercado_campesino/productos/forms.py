@@ -1,24 +1,24 @@
 from django import forms
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.utils.translation import gettext_lazy as _
 from .models import Producto
 
 class ProductoForm(forms.ModelForm):
     """Formulario para crear y editar productos"""
     
     CATEGORIAS_CHOICES = [
-        ('', 'Selecciona una categoría'),
-        ('Alimentos', 'Alimentos'),
-        ('Artesanías y Hogar', 'Artesanías y Hogar'),
-        ('Moda y Textiles', 'Moda y Textiles'),
-        ('Cultivo y Jardín', 'Cultivo y Jardín'),
-        ('Bienestar y Cuidado Personal', 'Bienestar y Cuidado Personal'),
+        ('', _('Selecciona una categoría')),
+        ('Alimentos', _('Alimentos')),
+        ('Artesanías y Hogar', _('Artesanías y Hogar')),
+        ('Moda y Textiles', _('Moda y Textiles')),
+        ('Cultivo y Jardín', _('Cultivo y Jardín')),
+        ('Bienestar y Cuidado Personal', _('Bienestar y Cuidado Personal')),
     ]
     
     categoria = forms.ChoiceField(
         choices=CATEGORIAS_CHOICES,
         widget=forms.Select(attrs={
             'class': 'form-control',
-            'data-placeholder': 'Selecciona una categoría'
         })
     )
     
@@ -28,7 +28,6 @@ class ProductoForm(forms.ModelForm):
         validators=[MinValueValidator(0.01)],
         widget=forms.NumberInput(attrs={
             'class': 'form-control',
-            'placeholder': '0.00',
             'step': '0.01',
             'min': '0.01'
         })
@@ -38,7 +37,6 @@ class ProductoForm(forms.ModelForm):
         validators=[MinValueValidator(0)],
         widget=forms.NumberInput(attrs={
             'class': 'form-control',
-            'placeholder': '0',
             'min': '0'
         })
     )
@@ -49,47 +47,60 @@ class ProductoForm(forms.ModelForm):
         widgets = {
             'nombre': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Nombre del producto'
             }),
             'descripcion': forms.Textarea(attrs={
                 'class': 'form-control',
                 'rows': 4,
-                'placeholder': 'Describe tu producto: origen, características, beneficios, etc.'
             }),
             'imagen': forms.FileInput(attrs={
                 'class': 'form-control',
                 'accept': 'image/*'
             })
         }
+        labels = {
+            'nombre': _('Nombre del producto'),
+            'descripcion': _('Descripción del producto'),
+            'precio': _('Precio'),
+            'stock': _('Stock'),
+            'categoria': _('Categoría'),
+            'imagen': _('Imagen')
+        }
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['nombre'].widget.attrs['placeholder'] = _('Nombre del producto')
+        self.fields['descripcion'].widget.attrs['placeholder'] = _('Describe tu producto: origen, características, beneficios, etc.')
+        self.fields['precio'].widget.attrs['placeholder'] = '0.00'
+        self.fields['stock'].widget.attrs['placeholder'] = '0'
     
     def clean_categoria(self):
         categoria = self.cleaned_data.get('categoria')
         if not categoria or categoria == '':
-            raise forms.ValidationError("Debes seleccionar una categoría.")
+            raise forms.ValidationError(_("Debes seleccionar una categoría."))
         return categoria
     
     def clean_nombre(self):
         nombre = self.cleaned_data.get('nombre')
         if len(nombre) < 3:
-            raise forms.ValidationError("El nombre debe tener al menos 3 caracteres.")
+            raise forms.ValidationError(_("El nombre debe tener al menos 3 caracteres."))
         return nombre.title()  # Capitaliza la primera letra de cada palabra
     
     def clean_descripcion(self):
         descripcion = self.cleaned_data.get('descripcion')
         if len(descripcion) < 10:
-            raise forms.ValidationError("La descripción debe tener al menos 10 caracteres.")
+            raise forms.ValidationError(_("La descripción debe tener al menos 10 caracteres."))
         return descripcion
     
     def clean_precio(self):
         precio = self.cleaned_data.get('precio')
         if precio and precio > 1000000:
-            raise forms.ValidationError("El precio no puede ser mayor a $1,000,000.")
+            raise forms.ValidationError(_("El precio no puede ser mayor a $1,000,000."))
         return precio
     
     def clean_stock(self):
         stock = self.cleaned_data.get('stock')
         if stock and stock > 1000:
-            raise forms.ValidationError("El stock no puede ser mayor a 1,000 unidades.")
+            raise forms.ValidationError(_("El stock no puede ser mayor a 1,000 unidades."))
         return stock
 
 class BuscarProductoForm(forms.Form):
@@ -99,17 +110,18 @@ class BuscarProductoForm(forms.Form):
         max_length=100,
         widget=forms.TextInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Buscar productos...',
             'autocomplete': 'off'
-        })
+        }),
+        label=_('Buscar')
     )
     
     categoria = forms.ChoiceField(
         required=False,
-        choices=[('', 'Todas las categorías')] + ProductoForm.CATEGORIAS_CHOICES[1:],
+        choices=[('', _('Todas las categorías'))] + ProductoForm.CATEGORIAS_CHOICES[1:],
         widget=forms.Select(attrs={
             'class': 'form-control'
-        })
+        }),
+        label=_('Categoría')
     )
     
     precio_min = forms.DecimalField(
@@ -119,10 +131,10 @@ class BuscarProductoForm(forms.Form):
         validators=[MinValueValidator(0)],
         widget=forms.NumberInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Precio mínimo',
             'step': '0.01',
             'min': '0'
-        })
+        }),
+        label=_('Precio mínimo')
     )
     
     precio_max = forms.DecimalField(
@@ -132,27 +144,34 @@ class BuscarProductoForm(forms.Form):
         validators=[MinValueValidator(0)],
         widget=forms.NumberInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Precio máximo',
             'step': '0.01',
             'min': '0'
-        })
+        }),
+        label=_('Precio máximo')
     )
     
     ordenar_por = forms.ChoiceField(
         required=False,
         choices=[
-            ('', 'Ordenar por...'),
-            ('nombre', 'Nombre A-Z'),
-            ('-nombre', 'Nombre Z-A'),
-            ('precio', 'Precio menor a mayor'),
-            ('-precio', 'Precio mayor a menor'),
-            ('-id', 'Más recientes'),
-            ('id', 'Más antiguos'),
+            ('', _('Ordenar por...')),
+            ('nombre', _('Nombre A-Z')),
+            ('-nombre', _('Nombre Z-A')),
+            ('precio', _('Precio menor a mayor')),
+            ('-precio', _('Precio mayor a menor')),
+            ('-id', _('Más recientes')),
+            ('id', _('Más antiguos')),
         ],
         widget=forms.Select(attrs={
             'class': 'form-control'
-        })
+        }),
+        label=_('Ordenar')
     )
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['busqueda'].widget.attrs['placeholder'] = _('Buscar productos...')
+        self.fields['precio_min'].widget.attrs['placeholder'] = _('Precio mínimo')
+        self.fields['precio_max'].widget.attrs['placeholder'] = _('Precio máximo')
     
     def clean(self):
         cleaned_data = super().clean()
@@ -160,7 +179,7 @@ class BuscarProductoForm(forms.Form):
         precio_max = cleaned_data.get('precio_max')
         
         if precio_min and precio_max and precio_min > precio_max:
-            raise forms.ValidationError("El precio mínimo no puede ser mayor al precio máximo.")
+            raise forms.ValidationError(_("El precio mínimo no puede ser mayor al precio máximo."))
         
         return cleaned_data
 

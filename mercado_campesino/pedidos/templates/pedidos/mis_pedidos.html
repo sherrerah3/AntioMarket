@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Mis Pedidos - AntioMarket{% endblock %}
+{% block title %}{% trans "Mis Pedidos" %} - AntioMarket{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
-    <h1 class="mb-4">Mis Pedidos</h1>
+    <h1 class="mb-4">{% trans "Mis Pedidos" %}</h1>
     
     {% if pedidos %}
         {% for pedido in pedidos %}
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">ID del pedido: #{{ pedido.id }}</h5>
+                    <h5 class="mb-0">{% trans "ID del pedido:" %} #{{ pedido.id }}</h5>
                     <span class="badge {% if pedido.estado == 'pendiente' %}bg-warning{% elif pedido.estado == 'completado' %}bg-success{% else %}bg-danger{% endif %}">
                         {{ pedido.get_estado_display }}
                     </span>
@@ -18,10 +19,10 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <p><strong>Fecha:</strong> {{ pedido.fecha_creacion|date:"d/m/Y H:i" }}</p>
+                            <p><strong>{% trans "Fecha:" %}</strong> {{ pedido.fecha_creacion|date:"d/m/Y H:i" }}</p>
                         </div>
                         <div class="col-md-6 text-md-end">
-                            <p><strong>Total:</strong> ${{ pedido.total }}</p>
+                            <p><strong>{% trans "Total:" %}</strong> ${{ pedido.total }}</p>
                         </div>
                     </div>
                     
@@ -29,10 +30,10 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Producto</th>
-                                    <th>Cantidad</th>
-                                    <th>Precio Unit.</th>
-                                    <th>Subtotal</th>
+                                    <th>{% trans "Producto" %}</th>
+                                    <th>{% trans "Cantidad" %}</th>
+                                    <th>{% trans "Precio Unit." %}</th>
+                                    <th>{% trans "Subtotal" %}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,7 +53,7 @@
         {% endfor %}
     {% else %}
         <div class="alert alert-info">
-            <p class="mb-0">Aún no has realizado ningún pedido.</p>
+            <p class="mb-0">{% trans "Aún no has realizado ningún pedido." %}</p>
         </div>
     {% endif %}
 </div>

@@ -684,7 +684,8 @@ msgid ""
 "Plataforma digital que conecta productores campesinos de Antioquia con "
 "consumidores conscientes, promoviendo el comercio local y el desarrollo "
 "sostenible."
-msgstr ""
+msgstr "A digital platform connecting rural producers in Antioquia with "
+"conscious consumers, promoting local trade and sustainable development."
 
 #: productos/templates/productos/nosotros.html:25
 msgid "Universidad EAFIT"
@@ -702,13 +703,12 @@ msgstr "Developers"
 msgid ""
 "Estudiantes de Arquitectura de Software encargados del diseño, desarrollo e "
 "implementación completa de la plataforma AntioMarket."
-msgstr ""
+msgstr "Software Architecture students in charge of the design, development "
+"and complete implementation of the AntioMarket platform"
 
 #: productos/templates/productos/nosotros.html:61
-#, fuzzy
-#| msgid "Imagen del Producto"
 msgid "Sobre el Proyecto"
-msgstr "Product Image"
+msgstr "About the Project"
 
 #: productos/templates/productos/nosotros.html:64
 msgid ""
@@ -716,7 +716,10 @@ msgid ""
 "campesina de Antioquia, facilitando el acceso al mercado digital para "
 "pequeños productores y conectándolos directamente con consumidores que "
 "valoran productos frescos y de origen local."
-msgstr ""
+msgstr "AntioMarket was created as a technological solution to strengthen "
+" the rural economy of Antioquia, facilitating access to the digital market "
+" for small producers and connecting them directly with consumers who value "
+" fresh, locally sourced products."
 
 #: productos/templates/productos/nosotros.html:69
 msgid "Sostenible"
@@ -731,10 +734,8 @@ msgid "Colaborativo"
 msgstr "Collaborative"
 
 #: productos/templates/productos/nosotros.html:75
-#, fuzzy
-#| msgid "Conectando productores campesinos con consumidores conscientes."
 msgid "Conectamos productores y consumidores"
-msgstr "Connecting rural producers with conscious consumers."
+msgstr "We connect producers and consumers"
 
 #: productos/templates/productos/nosotros.html:79
 msgid "Local"
@@ -810,16 +811,12 @@ msgid "Publicar Reseña"
 msgstr "Publish Review"
 
 #: reseñas/templates/reseñas/detalle_reseña.html:4
-#, fuzzy
-#| msgid "Reseñas"
 msgid "Reseña de"
-msgstr "Reviews"
+msgstr "Review of"
 
 #: reseñas/templates/reseñas/detalle_reseña.html:27
-#, fuzzy
-#| msgid "Reseñas"
 msgid "Reseña de:"
-msgstr "Reviews"
+msgstr "Review of:"
 
 #: reseñas/templates/reseñas/detalle_reseña.html:43
 msgid "Comentario:"
@@ -830,22 +827,16 @@ msgid "Escrito por:"
 msgstr "Written by:"
 
 #: reseñas/templates/reseñas/detalle_reseña.html:55
-#, fuzzy
-#| msgid "Reseñas"
 msgid "Volver a Reseñas"
-msgstr "Reviews"
+msgstr "Back to Reviews"
 
 #: reseñas/templates/reseñas/detalle_reseña.html:58
-#, fuzzy
-#| msgid "Ver Productos"
 msgid "Ver Producto"
-msgstr "View Products"
+msgstr "View Product"
 
 #: reseñas/templates/reseñas/lista_reseñas.html:15
-#, fuzzy
-#| msgid "Total de productos"
 msgid "Reseñas de Productos"
-msgstr "Total products"
+msgstr "Product Reviews"
 
 #: reseñas/templates/reseñas/lista_reseñas.html:16
 msgid "Descubre qué opinan nuestros clientes sobre los productos"
@@ -856,10 +847,8 @@ msgid "Buscar por producto, comentario o cliente..."
 msgstr "Search by product, comment or customer..."
 
 #: reseñas/templates/reseñas/lista_reseñas.html:29
-#, fuzzy
-#| msgid "Todas las categorías"
 msgid "Todas las calificaciones"
-msgstr "All categories"
+msgstr "All ratings"
 
 #: reseñas/templates/reseñas/lista_reseñas.html:30
 msgid "5 estrellas"
@@ -886,11 +875,163 @@ msgid "Ver más"
 msgstr "See more"
 
 #: reseñas/templates/reseñas/lista_reseñas.html:94
-#, fuzzy
-#| msgid "No hay productos disponibles"
 msgid "No hay reseñas disponibles"
-msgstr "No products available"
+msgstr "No reviews available"
 
 #: reseñas/templates/reseñas/lista_reseñas.html:95
 msgid "¡Sé el primero en escribir una reseña!"
 msgstr "Be the first to write a review!"
+
+# Traducciones adicionales para formularios
+#: productos/forms.py
+msgid "Selecciona una categoría"
+msgstr "Select a category"
+
+msgid "Alimentos"
+msgstr "Food"
+
+msgid "Artesanías y Hogar"
+msgstr "Crafts and Home"
+
+msgid "Moda y Textiles"
+msgstr "Fashion and Textiles"
+
+msgid "Cultivo y Jardín"
+msgstr "Crops and Garden"
+
+msgid "Bienestar y Cuidado Personal"
+msgstr "Wellness and Personal Care"
+
+msgid "Nombre del producto"
+msgstr "Product name"
+
+msgid "Descripción del producto"
+msgstr "Product description"
+
+msgid "Describe tu producto: origen, características, beneficios, etc."
+msgstr "Describe your product: origin, features, benefits, etc."
+
+msgid "Debes seleccionar una categoría."
+msgstr "You must select a category."
+
+msgid "El nombre debe tener al menos 3 caracteres."
+msgstr "Name must be at least 3 characters."
+
+msgid "La descripción debe tener al menos 10 caracteres."
+msgstr "Description must be at least 10 characters."
+
+msgid "El precio no puede ser mayor a $1,000,000."
+msgstr "Price cannot be more than $1,000,000."
+
+msgid "El stock no puede ser mayor a 1,000 unidades."
+msgstr "Stock cannot be more than 1,000 units."
+
+msgid "Buscar"
+msgstr "Search"
+
+msgid "Ordenar por..."
+msgstr "Sort by..."
+
+msgid "Nombre A-Z"
+msgstr "Name A-Z"
+
+msgid "Nombre Z-A"
+msgstr "Name Z-A"
+
+msgid "Precio menor a mayor"
+msgstr "Price low to high"
+
+msgid "Precio mayor a menor"
+msgstr "Price high to low"
+
+msgid "Más recientes"
+msgstr "Most recent"
+
+msgid "Más antiguos"
+msgstr "Oldest"
+
+msgid "Ordenar"
+msgstr "Sort"
+
+msgid "El precio mínimo no puede ser mayor al precio máximo."
+msgstr "Minimum price cannot be greater than maximum price."
+
+#: cuentas/forms.py
+msgid "Tu nombre"
+msgstr "Your name"
+
+msgid "Tu apellido"
+msgstr "Your last name"
+
+msgid "Dirección de la tienda"
+msgstr "Store address"
+
+msgid "Dirección donde vendes tus productos"
+msgstr "Address where you sell your products"
+
+msgid "Descripción de la zona"
+msgstr "Area description"
+
+msgid "Describe la zona donde está ubicada tu finca o tienda"
+msgstr "Describe the area where your farm or store is located"
+
+msgid "Nombre de la tienda"
+msgstr "Store name"
+
+msgid "Descripción de la tienda"
+msgstr "Store description"
+
+msgid "Ej: Finca San José, Verduras del Campo, etc."
+msgstr "E.g.: San José Farm, Vegetables from the Field, etc."
+
+msgid "Describe tu tienda, productos que vendes, experiencia, etc."
+msgstr "Describe your store, products you sell, experience, etc."
+
+msgid "Este email ya está registrado por otro usuario."
+msgstr "This email is already registered by another user."
+
+msgid "Ingresa la dirección específica"
+msgstr "Enter the specific address"
+
+msgid "Describe la zona (referencias, puntos cercanos, etc.)"
+msgstr "Describe the area (references, nearby landmarks, etc.)"
+
+#: reseñas/forms.py
+msgid "Selecciona una calificación"
+msgstr "Select a rating"
+
+msgid "Comentario opcional sobre el producto..."
+msgstr "Optional comment about the product..."
+
+msgid "Comentario (Opcional)"
+msgstr "Comment (Optional)"
+
+# Nuevas traducciones para registro
+msgid "Información del Negocio"
+msgstr "Business Information"
+
+msgid "¿Solo quieres comprar?"
+msgstr "Just want to buy?"
+
+msgid "Ubicación"
+msgstr "Location"
+
+# Traducciones para pedidos
+msgid "ID del pedido:"
+msgstr "Order ID:"
+
+msgid "Fecha:"
+msgstr "Date:"
+
+msgid "Cantidad"
+msgstr "Quantity"
+
+msgid "Precio Unit."
+msgstr "Unit Price"
+
+msgid "Subtotal"
+msgstr "Subtotal"
+
+msgid "Aún no has realizado ningún pedido."
+msgstr "You haven't placed any orders yet."
+

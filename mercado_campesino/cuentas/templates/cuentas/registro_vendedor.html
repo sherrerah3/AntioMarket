@@ -53,7 +53,7 @@
                         {{ form.username.errors }}
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="{{ form.email.id_for_label }}" class="form-label">Correo electrónico</label>
+                        <label for="{{ form.email.id_for_label }}" class="form-label">{% trans "Correo electrónico" %}</label>
                         {{ form.email }}
                         {{ form.email.errors }}
                     </div>
@@ -61,12 +61,12 @@
                 
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="{{ form.password1.id_for_label }}" class="form-label">Contraseña</label>
+                        <label for="{{ form.password1.id_for_label }}" class="form-label">{% trans "Contraseña" %}</label>
                         {{ form.password1 }}
                         {{ form.password1.errors }}
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="{{ form.password2.id_for_label }}" class="form-label">Confirmar contraseña</label>
+                        <label for="{{ form.password2.id_for_label }}" class="form-label">{% trans "Confirmar Contraseña" %}</label>
                         {{ form.password2 }}
                         {{ form.password2.errors }}
                     </div>
@@ -75,16 +75,16 @@
             
             <!-- Información del Vendedor -->
             <div class="form-section">
-                <h4 class="section-title"><i class="fas fa-store me-2"></i>Información del Negocio</h4>
+                <h4 class="section-title"><i class="fas fa-store me-2"></i>{% trans "Información del Negocio" %}</h4>
                               
                 <div class="mb-3">
-                    <label for="{{ form.nombre_tienda.id_for_label }}" class="form-label">Nombre de la tienda</label>
+                    <label for="{{ form.nombre_tienda.id_for_label }}" class="form-label">{% trans "Nombre de la tienda" %}</label>
                     {{ form.nombre_tienda }}
                     {{ form.nombre_tienda.errors }}
                 </div>
                 
                 <div class="mb-3">
-                    <label for="{{ form.descripcion_tienda.id_for_label }}" class="form-label">Descripción de la tienda</label>
+                    <label for="{{ form.descripcion_tienda.id_for_label }}" class="form-label">{% trans "Descripción de la tienda" %}</label>
                     {{ form.descripcion_tienda }}
                     {{ form.descripcion_tienda.errors }}
                 </div>
@@ -92,48 +92,48 @@
             
             <!-- Ubicación -->
             <div class="form-section">
-                <h4 class="section-title"><i class="fas fa-map-marker-alt me-2"></i>Ubicación</h4>
+                <h4 class="section-title"><i class="fas fa-map-marker-alt me-2"></i>{% trans "Ubicación" %}</h4>
                 
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="{{ form.departamento.id_for_label }}" class="form-label">Departamento</label>
+                        <label for="{{ form.departamento.id_for_label }}" class="form-label">{% trans "Departamento" %}</label>
                         {{ form.departamento }}
                         {{ form.departamento.errors }}
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="{{ form.municipio.id_for_label }}" class="form-label">Municipio</label>
+                        <label for="{{ form.municipio.id_for_label }}" class="form-label">{% trans "Municipio" %}</label>
                         {{ form.municipio }}
                         {{ form.municipio.errors }}
                     </div>
                 </div>
                 
                 <div class="mb-3">
-                    <label for="{{ form.direccion_tienda.id_for_label }}" class="form-label">Dirección de la tienda</label>
+                    <label for="{{ form.direccion_tienda.id_for_label }}" class="form-label">{% trans "Dirección de la tienda" %}</label>
                     {{ form.direccion_tienda }}
                     {{ form.direccion_tienda.errors }}
                 </div>
                 
                 <div class="mb-3">
-                    <label for="{{ form.descripcion_zona.id_for_label }}" class="form-label">Descripción de la zona</label>
+                    <label for="{{ form.descripcion_zona.id_for_label }}" class="form-label">{% trans "Descripción de la zona" %}</label>
                     {{ form.descripcion_zona }}
                     {{ form.descripcion_zona.errors }}
                 </div>
             </div>
             
             <button type="submit" class="btn btn-registro vendedor">
-                <i class="fas fa-store me-2"></i>Registrarse como Vendedor
+                <i class="fas fa-store me-2"></i>{% trans "Registrarse como Vendedor" %}
             </button>
         </form>
         
         <div class="login-link">
-            <p>¿Ya tienes cuenta? 
+            <p>{% trans "¿Ya tienes cuenta?" %} 
                 <a href="{% url 'cuentas:login' %}">
-                    <i class="fas fa-sign-in-alt me-1"></i>Iniciar sesión
+                    <i class="fas fa-sign-in-alt me-1"></i>{% trans "Iniciar sesión" %}
                 </a>
             </p>
-            <p>¿Solo quieres comprar? 
+            <p>{% trans "¿Solo quieres comprar?" %} 
                 <a href="{% url 'cuentas:registro_cliente' %}">
-                    <i class="fas fa-user me-1"></i>Registrarse como Cliente
+                    <i class="fas fa-user me-1"></i>{% trans "Registrarse como Cliente" %}
                 </a>
             </p>
         </div>

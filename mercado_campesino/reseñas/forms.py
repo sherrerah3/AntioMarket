@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 from .models import Reseña
 
 class ReseñaForm(forms.ModelForm):
@@ -11,12 +12,12 @@ class ReseñaForm(forms.ModelForm):
                 'required': True
             }),
             'calificacion': forms.Select(choices=[
-                ('', 'Selecciona una calificación'),
-                (1, '⭐ 1 estrella'),
-                (2, '⭐⭐ 2 estrellas'),
-                (3, '⭐⭐⭐ 3 estrellas'),
-                (4, '⭐⭐⭐⭐ 4 estrellas'),
-                (5, '⭐⭐⭐⭐⭐ 5 estrellas'),
+                ('', _('Selecciona una calificación')),
+                (1, '⭐ ' + _('1 estrella')),
+                (2, '⭐⭐ ' + _('2 estrellas')),
+                (3, '⭐⭐⭐ ' + _('3 estrellas')),
+                (4, '⭐⭐⭐⭐ ' + _('4 estrellas')),
+                (5, '⭐⭐⭐⭐⭐ ' + _('5 estrellas')),
             ], attrs={
                 'class': 'form-select',
                 'required': True
@@ -24,15 +25,18 @@ class ReseñaForm(forms.ModelForm):
             'contenido': forms.Textarea(attrs={
                 'class': 'form-control',
                 'rows': 3,
-                'placeholder': 'Comentario opcional sobre el producto...',
                 'required': False
             })
         }
         labels = {
-            'producto': 'Producto',
-            'calificacion': 'Calificación',
-            'contenido': 'Comentario (Opcional)'
+            'producto': _('Producto'),
+            'calificacion': _('Calificación'),
+            'contenido': _('Comentario (Opcional)')
         }
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['contenido'].widget.attrs['placeholder'] = _('Comentario opcional sobre el producto...')
 
 class BuscarReseñaForm(forms.Form):
     busqueda = forms.CharField(
@@ -40,21 +44,26 @@ class BuscarReseñaForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Buscar por producto, comentario o cliente...'
-        })
+        }),
+        label=_('Buscar')
     )
     
     calificacion = forms.ChoiceField(
         choices=[
-            ('', 'Todas las calificaciones'),
-            (1, '⭐ 1 estrella'),
-            (2, '⭐⭐ 2 estrellas'),
-            (3, '⭐⭐⭐ 3 estrellas'),
-            (4, '⭐⭐⭐⭐ 4 estrellas'),
-            (5, '⭐⭐⭐⭐⭐ 5 estrellas'),
+            ('', _('Todas las calificaciones')),
+            (1, '⭐ ' + _('1 estrella')),
+            (2, '⭐⭐ ' + _('2 estrellas')),
+            (3, '⭐⭐⭐ ' + _('3 estrellas')),
+            (4, '⭐⭐⭐⭐ ' + _('4 estrellas')),
+            (5, '⭐⭐⭐⭐⭐ ' + _('5 estrellas')),
         ],
         required=False,
         widget=forms.Select(attrs={
             'class': 'form-select'
-        })
+        }),
+        label=_('Calificación')
     )
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['busqueda'].widget.attrs['placeholder'] = _('Buscar por producto, comentario o cliente...')
