@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load currency_tags %}
 
 {% block title %}{% trans "Mi Carrito - AntioMarket" %}{% endblock %}
 
@@ -32,7 +33,7 @@
                         <p class="tienda-nombre mb-0">{{ item.producto.vendedor.nombre_tienda }}</p>
                     </div>
                     <div class="col-md-2">
-                        <strong class="precio-producto">${{ item.producto.precio }}</strong>
+                        <strong class="precio-producto">{% display_price item.producto.precio CURRENT_CURRENCY %}</strong>
                     </div>
                     <div class="col-md-2">
                         <div class="cantidad-controls d-flex align-items-center">
@@ -54,7 +55,7 @@
                         </div>
                     </div>
                     <div class="col-md-2 text-end">
-                        <div class="subtotal-item">${{ item.subtotal }}</div>
+                        <div class="subtotal-item">{% display_price item.subtotal CURRENT_CURRENCY %}</div>
                         <a href="{% url 'carrito:eliminar_producto' item.id %}" class="btn btn-sm btn-outline-danger mt-1">
                             <i class="fas fa-trash"></i>
                         </a>
@@ -66,7 +67,7 @@
             <!-- Total y acciones -->
             <div class="total-section">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h4>{% trans "Total" %}: <strong>${{ total }}</strong></h4>
+                    <h4>{% trans "Total" %}: <strong>{% display_price total CURRENT_CURRENCY %}</strong></h4>
                     <form method="post" action="{% url 'carrito:procesar_pedido' %}" style="display: inline;">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-success">

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load currency_tags %}
 
 {% block title %}{% trans "AntioMarket - Mercado Campesino" %}{% endblock %}
 
@@ -59,7 +60,7 @@
                     </div>
 
                     <div class="card-footer d-flex justify-content-between align-items-center bg-transparent border-0">
-                        <span class="price-tag">${{ producto.precio }}</span>
+                        <span class="price-tag">{% display_price producto.precio CURRENT_CURRENCY %}</span>
                         {% if user.is_authenticated %}
                             {% if user.is_cliente %}
                                 <a href="{% url 'carrito:agregar_producto' producto.id %}" class="btn btn-add-to-cart btn-sm">

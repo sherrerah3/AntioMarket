@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load currency_tags %}
 
 {% block title %}{% trans "Mis Pedidos" %} - AntioMarket{% endblock %}
 
@@ -38,7 +39,7 @@
                             <p><strong>{% trans "Fecha:" %}</strong> {{ pedido.fecha_creacion|date:"d/m/Y H:i" }}</p>
                         </div>
                         <div class="col-md-6 text-md-end">
-                            <p><strong>{% trans "Total:" %}</strong> ${{ pedido.total }}</p>
+                            <p><strong>{% trans "Total:" %}</strong> {% display_price pedido.total CURRENT_CURRENCY %}</p>
                         </div>
                     </div>
                     
@@ -57,8 +58,8 @@
                                     <tr>
                                         <td>{{ detalle.producto.nombre }}</td>
                                         <td>{{ detalle.cantidad }}</td>
-                                        <td>${{ detalle.precio_unitario }}</td>
-                                        <td>${{ detalle.subtotal }}</td>
+                                        <td>{% display_price detalle.precio_unitario CURRENT_CURRENCY %}</td>
+                                        <td>{% display_price detalle.subtotal CURRENT_CURRENCY %}</td>
                                     </tr>
                                 {% endfor %}
                             </tbody>

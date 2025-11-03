@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load currency_tags %}
 
 {% block title %}{{ producto.nombre }} - AntioMarket{% endblock %}
 
@@ -71,7 +72,7 @@
                 <h1 class="mb-3">{{ producto.nombre }}</h1>
                 
                 <div class="producto-precio">
-                    ${{ producto.precio }}
+                    {% display_price producto.precio CURRENT_CURRENCY %}
                 </div>
                 
                 <div class="stock-info">

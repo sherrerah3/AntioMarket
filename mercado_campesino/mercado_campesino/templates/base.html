@@ -43,6 +43,13 @@
                 </form>
             </div>
             
+            <!-- Indicador de moneda -->
+            <div class="currency-indicator ms-2">
+                <span class="badge bg-success">
+                    <i class="fas fa-money-bill-wave me-1"></i>{{ CURRENT_CURRENCY }}
+                </span>
+            </div>
+            
             <!-- Menú de navegación -->
             <div class="navbar-nav me-auto">
                 <a class="nav-link" href="{% url 'productos:home' %}">
