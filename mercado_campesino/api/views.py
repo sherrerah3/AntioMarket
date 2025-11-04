@@ -4,7 +4,7 @@ from productos.models import Producto
 
 def productos_disponibles(request):
     """Devuelve la lista de productos con stock > 0 en formato JSON."""
-    base_url = "http://54.158.38.201/"
+    base_url = "http://54.158.38.201"
 
     productos_queryset = Producto.objects.filter(stock__gt=0).values('id', 'nombre', 'stock')
 
