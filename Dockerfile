@@ -1,25 +1,27 @@
 # Imagen base ligera de Python
 FROM python:3.11-slim
 
-# Evitar archivos .pyc y buffering
+# Evitar archivos .pyc y salida en buffer
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Crear directorio de trabajo
-WORKDIR /app
+# Crear y usar el directorio de trabajo
+WORKDIR /app/mercado_campesino
 
-# Copiar e instalar dependencias
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Copiar los requerimientos al contenedor
+COPY requirements.txt /app/
+
+# Instalar dependencias de Python
+RUN pip install --no-cache-dir -r /app/requirements.txt
 
 # Copiar todo el código del proyecto
-COPY . .
+COPY . /app/
 
-# Ejecutar collectstatic (para archivos estáticos de Django)
-RUN python mercado_campesino/manage.py collectstatic --noinput || true
+# Ejecutar collectstatic (para archivos estáticos)
+RUN python manage.py collectstatic --noinput || true
 
-# Exponer el puerto interno donde corre Django
+# Exponer el puerto donde correrá Django
 EXPOSE 8000
 
-# Comando para iniciar el servidor con Gunicorn (modo producción)
-CMD ["gunicorn", "mercado_campesino.mercado_campesino.wsgi:application", "--bind", "0.0.0.0:8000"]
+# Iniciar el servidor con Gunicorn
+CMD ["gunicorn", "mercado_campesino.wsgi:application", "--bind", "0.0.0.0:8000"]
