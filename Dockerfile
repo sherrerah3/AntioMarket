@@ -22,4 +22,4 @@ RUN python mercado_campesino/manage.py collectstatic --noinput || true
 EXPOSE 8000
 
 # Comando para iniciar el servidor con Gunicorn (modo producción)
-CMD ["gunicorn", "mercado_campesino.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "mercado_campesino.mercado_campesino.wsgi:application", "--bind", "0.0.0.0:8000"]
