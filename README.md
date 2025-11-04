@@ -33,19 +33,10 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-6. **Ejecutar servidor del microservicio en flask**
-
-En una nueva pestaña de la consola:
-```bash
-cd AntioMarket/flask_servicio
-python app.py
-```
-
 ## Acceso al Sistema
 
 - **URL Principal**: http://127.0.0.1:8000/
 - **Panel Admin**: http://127.0.0.1:8000/admin/
-- **URL del microservicio en Flask**: http://localhost:5001/api/productos
 
 ## Tipos de Usuario
 
