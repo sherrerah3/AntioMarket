@@ -32,6 +32,7 @@ urlpatterns += i18n_patterns(
     path('carrito/', include('carrito.urls')),
     path('reseñas/', include('reseñas.urls')),
     path('pedidos/', include('pedidos.urls')),
+    path('api/', include('api.urls')),
 )
 
 # Archivos media
