@@ -19,121 +19,146 @@
 <body>
     <!-- Header/Navbar -->
     <nav class="navbar navbar-expand-lg">
-        <div class="container">
+        <div class="container-fluid">
             <!-- Logo/Brand -->
             <a class="navbar-brand" href="{% url 'productos:home' %}">
                 <i class="fas fa-seedling me-2"></i>
                 AntioMarket
             </a>
             
-            <!-- Selector de idioma -->
-            <div class="language-selector">
-                <form action="{% url 'set_language' %}" method="post">
-                    {% csrf_token %}
-                    <input name="next" type="hidden" value="{{ request.path }}">
-                    <select name="language" onchange="this.form.submit()" class="form-select form-select-sm">
-                        {% get_current_language as LANGUAGE_CODE %}
-                        {% get_available_languages as LANGUAGES %}
-                        {% for lang_code, lang_name in LANGUAGES %}
-                            <option value="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}selected{% endif %}>
-                                {{ lang_name }}
-                            </option>
-                        {% endfor %}
-                    </select>
-                </form>
-            </div>
+            <!-- Toggle button para móviles -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             
-            <!-- Indicador de moneda -->
-            <div class="currency-indicator ms-2">
-                <span class="badge bg-success">
-                    <i class="fas fa-money-bill-wave me-1"></i>{{ CURRENT_CURRENCY }}
-                </span>
-            </div>
-            
-            <!-- Menú de navegación -->
-            <div class="navbar-nav me-auto">
-                <a class="nav-link" href="{% url 'productos:home' %}">
-                    <i class="fas fa-home me-1"></i>{% trans "Inicio" %}
-                </a>
-                <a class="nav-link" href="{% url 'cuentas:lista_vendedores' %}">
-                    <i class="fas fa-users me-1"></i>{% trans "Productores" %}
-                </a>
-                <a class="nav-link" href="{% url 'api:productos_aliados' %}">
-                    <i class="fas fa-handshake me-1"></i>{% trans "Productos Aliados" %}
-                </a>
-                <a class="nav-link" href="{% url 'reseñas:lista_reseñas' %}">
-                    <i class="fas fa-star me-1"></i>{% trans "Reseñas" %}
-                </a>
-                <a class="nav-link" href="{% url 'productos:nosotros' %}">
-                    <i class="fas fa-info-circle me-1"></i>{% trans "Nosotros" %}
-                </a>
-            </div>
-            
-            <!-- Menú derecho (usuario, carrito) -->
-            <div class="navbar-nav">
-                <!-- Carrito -->
-                {% if user.is_authenticated and user.is_cliente %}
-                    <a class="nav-link position-relative" href="{% url 'carrito:ver_carrito' %}">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-badge" id="cart-count">0</span>
-                    </a>
-                {% endif %}
+            <!-- Contenido colapsable del navbar -->
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <!-- Menú de navegación -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'productos:home' %}">
+                            <i class="fas fa-home me-1"></i>{% trans "Inicio" %}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'cuentas:lista_vendedores' %}">
+                            <i class="fas fa-users me-1"></i>{% trans "Productores" %}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'api:productos_aliados' %}">
+                            <i class="fas fa-handshake me-1"></i>{% trans "Productos Aliados" %}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'reseñas:lista_reseñas' %}">
+                            <i class="fas fa-star me-1"></i>{% trans "Reseñas" %}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'productos:nosotros' %}">
+                            <i class="fas fa-info-circle me-1"></i>{% trans "Nosotros" %}
+                        </a>
+                    </li>
+                </ul>
                 
-                {% if user.is_authenticated %}
-                    <!-- Usuario autenticado -->
-                    <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            <i class="fas fa-user me-1"></i>{{ user.first_name|default:user.username }}
-                        </a>
-                        <ul class="dropdown-menu">
-                            {% if user.is_vendedor %}
-                                <li><a class="dropdown-item" href="{% url 'cuentas:perfil_vendedor' %}">
-                                    <i class="fas fa-user-circle me-2"></i>{% trans "Mi Perfil" %}
-                                </a></li>
-                                <li><a class="dropdown-item" href="{% url 'productos:mis_productos' %}">
-                                    <i class="fas fa-box me-2"></i>{% trans "Mis Productos" %}
-                                </a></li>
-                            {% endif %}
-                            
-                            {% if user.is_cliente %}
-                                <li><a class="dropdown-item" href="{% url 'cuentas:perfil_cliente' %}">
-                                    <i class="fas fa-user-circle me-2"></i>{% trans "Mi Perfil" %}
-                                </a></li>
-                                <li><a class="dropdown-item" href="{% url 'pedidos:mis_pedidos' %}">
-                                    <i class="fas fa-shopping-bag me-2"></i>{% trans "Mis Pedidos" %}
-                                </a></li>
-                            {% endif %}
-                            
-                            <li><hr class="dropdown-divider"></li>
-                            <li class="dropdown-item logout-btn">
-                                <form method="post" action="{% url 'cuentas:logout' %}" style="display: inline;">
-                                    {% csrf_token %}
-                                    <button type="submit" class="dropdown-item border-0 bg-transparent text-start w-100" style="cursor: pointer;">
-                                        <i class="fas fa-sign-out-alt me-2"></i>{% trans "Cerrar Sesión" %}
-                                    </button>
-                                </form>
-                            </li>
-                        </ul>
+                <!-- Selector de idioma e indicador de moneda -->
+                <div class="d-flex align-items-center">
+                    <!-- Selector de idioma -->
+                    <div class="language-selector me-2">
+                        <form action="{% url 'set_language' %}" method="post">
+                            {% csrf_token %}
+                            <input name="next" type="hidden" value="{{ request.path }}">
+                            <select name="language" onchange="this.form.submit()" class="form-select form-select-sm">
+                                {% get_current_language as LANGUAGE_CODE %}
+                                {% get_available_languages as LANGUAGES %}
+                                {% for lang_code, lang_name in LANGUAGES %}
+                                    <option value="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}selected{% endif %}>
+                                        {{ lang_name }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </form>
                     </div>
-                {% else %}
-                    <!-- Usuario no autenticado -->
-                    <a class="nav-link" href="{% url 'cuentas:login' %}">
-                        <i class="fas fa-sign-in-alt me-1"></i>{% trans "Ingresar" %}
-                    </a>
-                    <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            <i class="fas fa-user-plus me-1"></i>{% trans "Registrarse" %}
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'cuentas:registro_cliente' %}">
-                                <i class="fas fa-user me-2"></i>{% trans "Como Cliente" %}
-                            </a></li>
-                            <li><a class="dropdown-item" href="{% url 'cuentas:registro_vendedor' %}">
-                                <i class="fas fa-store me-2"></i>{% trans "Como Vendedor" %}
-                            </a></li>
-                        </ul>
+                    
+                    <!-- Indicador de moneda -->
+                    <div class="currency-indicator me-3">
+                        <span class="badge bg-success">
+                            <i class="fas fa-money-bill-wave me-1"></i>{{ CURRENT_CURRENCY }}
+                        </span>
                     </div>
-                {% endif %}
+                </div>
+                
+                <!-- Menú derecho (usuario, carrito) -->
+                <ul class="navbar-nav">
+                    <!-- Carrito -->
+                    {% if user.is_authenticated and user.is_cliente %}
+                        <li class="nav-item">
+                            <a class="nav-link position-relative" href="{% url 'carrito:ver_carrito' %}">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="cart-badge" id="cart-count">0</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                    
+                    {% if user.is_authenticated %}
+                        <!-- Usuario autenticado -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-user me-1"></i>{{ user.first_name|default:user.username }}
+                            </a>
+                            <ul class="dropdown-menu">
+                                {% if user.is_vendedor %}
+                                    <li><a class="dropdown-item" href="{% url 'cuentas:perfil_vendedor' %}">
+                                        <i class="fas fa-user-circle me-2"></i>{% trans "Mi Perfil" %}
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="{% url 'productos:mis_productos' %}">
+                                        <i class="fas fa-box me-2"></i>{% trans "Mis Productos" %}
+                                    </a></li>
+                                {% endif %}
+                                
+                                {% if user.is_cliente %}
+                                    <li><a class="dropdown-item" href="{% url 'cuentas:perfil_cliente' %}">
+                                        <i class="fas fa-user-circle me-2"></i>{% trans "Mi Perfil" %}
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="{% url 'pedidos:mis_pedidos' %}">
+                                        <i class="fas fa-shopping-bag me-2"></i>{% trans "Mis Pedidos" %}
+                                    </a></li>
+                                {% endif %}
+                                
+                                <li><hr class="dropdown-divider"></li>
+                                <li class="dropdown-item logout-btn">
+                                    <form method="post" action="{% url 'cuentas:logout' %}" style="display: inline;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="dropdown-item border-0 bg-transparent text-start w-100" style="cursor: pointer;">
+                                            <i class="fas fa-sign-out-alt me-2"></i>{% trans "Cerrar Sesión" %}
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <!-- Usuario no autenticado -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'cuentas:login' %}">
+                                <i class="fas fa-sign-in-alt me-1"></i>{% trans "Ingresar" %}
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-user-plus me-1"></i>{% trans "Registrarse" %}
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'cuentas:registro_cliente' %}">
+                                    <i class="fas fa-user me-2"></i>{% trans "Como Cliente" %}
+                                </a></li>
+                                <li><a class="dropdown-item" href="{% url 'cuentas:registro_vendedor' %}">
+                                    <i class="fas fa-store me-2"></i>{% trans "Como Vendedor" %}
+                                </a></li>
+                            </ul>
+                        </li>
+                    {% endif %}
+                </ul>
             </div>
         </div>
     </nav>
