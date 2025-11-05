@@ -10,7 +10,7 @@ class ProductosAliadosService:
     """Servicio para obtener productos de tiendas aliadas"""
     
     # API del equipo aliado
-    API_URL = "https://comercia-1.onrender.com/es/api/products/"
+    API_URL = "https://technological-fayth-movidle-268bfd9d.koyeb.app/api/public/movies/"
     CACHE_KEY = "productos_aliados_comercia"
     CACHE_TIMEOUT = 1800  # 30 minutos
     
