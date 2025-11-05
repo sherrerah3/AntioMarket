@@ -1035,3 +1035,63 @@ msgstr "Subtotal"
 msgid "Aún no has realizado ningún pedido."
 msgstr "You haven't placed any orders yet."
 
+# API - Productos Aliados
+msgid "Productos Aliados"
+msgstr "Partner Products"
+
+msgid "Productos Aliados - Comercia"
+msgstr "Partner Products - Comercia"
+
+msgid "Explora productos de nuestras tiendas asociadas"
+msgstr "Explore products from our partner stores"
+
+msgid "productos disponibles"
+msgstr "products available"
+
+msgid "Limpiar"
+msgstr "Clear"
+
+msgid "Buscando:"
+msgstr "Searching:"
+
+msgid "Categoría:"
+msgstr "Category:"
+
+msgid "resultados encontrados"
+msgstr "results found"
+
+msgid "Disponible"
+msgstr "Available"
+
+msgid "No disponible"
+msgstr "Not available"
+
+msgid "Ver en Comercia"
+msgstr "View on Comercia"
+
+msgid "No se encontraron productos"
+msgstr "No products found"
+
+msgid "Intenta cambiar los filtros de búsqueda."
+msgstr "Try changing the search filters."
+
+msgid "No hay productos disponibles en este momento."
+msgstr "There are no products available at this time."
+
+msgid "Ver todos los productos"
+msgstr "View all products"
+
+msgid "Error al cargar productos"
+msgstr "Error loading products"
+
+msgid "No pudimos conectar con la tienda aliada. Por favor, intenta de nuevo más tarde."
+msgstr "We couldn't connect to the partner store. Please try again later."
+
+msgid "Reintentar"
+msgstr "Retry"
+
+msgid "Volver a AntioMarket"
+msgstr "Back to AntioMarket"
+
+
+

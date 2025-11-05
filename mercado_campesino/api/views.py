@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from django.conf import settings
 from productos.models import Producto
+from .services import ProductosAliadosService
 
 def productos_disponibles(request):
     """Devuelve la lista de productos con stock > 0 en formato JSON."""
@@ -18,3 +19,29 @@ def productos_disponibles(request):
         })
 
     return JsonResponse(productos, safe=False)
+
+
+def productos_aliados(request):
+    """API que devuelve productos de tiendas aliadas en formato JSON"""
+    
+    # Obtener parámetros de búsqueda y filtro
+    busqueda = request.GET.get('buscar', '').strip()
+    categoria = request.GET.get('categoria', '')
+    
+    # Obtener productos desde la API externa
+    if busqueda or categoria:
+        productos = ProductosAliadosService.buscar_productos(
+            query=busqueda if busqueda else None,
+            categoria=categoria if categoria else None
+        )
+        result = {
+            'success': True,
+            'count': len(productos),
+            'results': productos
+        }
+    else:
+        result = ProductosAliadosService.obtener_productos()
+        if result['success']:
+            result['results'] = result.pop('data')
+    
+    return JsonResponse(result, safe=False, json_dumps_params={'ensure_ascii': False})
